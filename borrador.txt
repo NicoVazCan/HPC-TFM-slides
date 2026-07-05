@@ -1,0 +1,240 @@
+
+Contexto
+    ¿Qué es un motor de físicas?
+        Definiciones
+            Ciencia:
+            Una aproximación iterativa de la física clásica para resolver las colisiones entre cuerpos rígidos en un espacio tri/bidimensional.
+            Ingeniería:
+            Una biblioteca que permite similar la interacción física entre cuerpos de forma realista y en tiempo real.
+            Videojuegos:
+            Un componente o extensión del motor gráfico para dotar a los objetos del juego de propiedades físicas.
+        Origen
+        Aplicaciones
+        Ejemplos
+
+    ¿Qué es un sistemas embebidos?
+        Definición
+        Origen
+        Aplicaciones
+        Ejemplos
+
+Fundamentos
+    ¿Qué es el motor Box2D-lite?
+        Definicion
+            Motor de físicas
+            Programado en C++
+            Dos dimensiones
+            Cuerpos rígidos
+            Articulaciones
+        Origen
+            Desarrollado por Erin Catto en 2006
+            Presentado en la Game Development Conference
+            Prueba de concepto 
+    ¿Cómo funciona Box2D-lite?
+        Elementos
+            
+    ¿Qué es un índice espacial dinámico?
+        Ejemplos
+            DBVH
+            SAP
+#        ¿Qué es un DBVH?
+#        ¿Qué es un SAP?
+
+Objetivos y motivaciones principales
+    Mejorar el rendimiento de Box2D-lite
+        ¿Porqué?
+            Buena documentación
+            Código fuente limpio y comprensible
+            Alto coste computacional
+            Carente de muchas optimizaciones
+            No aprovecha las arquitecturas multi-nucleo
+        ¿Para qué?
+            Demostrar y refinar conocimientos
+                Optimización y paralelización
+            Permitir simular mayor cantidad de cuerpos
+                Videojuegos más detallados físicamente
+            Ocupar menos tiempo CPU por fotograma
+                Lógica, IA, y gráficos duran cada vez más
+            Ejecutar el motor en plataformas más modestas
+                Componentes cada vez más caros
+    Optimizarlo para sistemas embebidos
+        ¿Porqué?
+            Mejoras de rendimiento más notorias
+            Mayor control del hardware
+            Arquitectura más simple y fácil de entender
+        ¿Para qué?
+            Ejecutar el motor en arquitecturas ARM
+                Robótica
+                Videojuegos móviles
+
+Metodología
+    ¿Cuál se escogió?
+        Metodología ágil
+        Definición
+    ¿Porqué se escogió?
+        Proyecto de dimensiones desconocidas
+        Desarrollo fácilmente separable por iteraciones
+        Tener en todo momento una versión funcional
+    ¿Cómo se aplicó?
+        Analizar y desarrollar tares necesarias para comenzar
+        Por cada iteración:
+            Analizar cuellos de botella
+            Investigar soluciones
+            Implementar soluciones
+            Medir mejora de rendimiento
+
+Planificación
+    Tareas previstas
+        Estudiar Box2D-lite
+            Funcionamiento teórico y técnico
+        Analizar cuellos de botella
+            Principales hotspots que mejorar
+        Investigar posibles soluciones
+            Técnicas de optimización y paralelización
+        Desarrollar demo técnica
+            Programa de prueba de funcionamiento y rendimiento
+        Preparar las herramientas necesarias
+            Compilación, plataformas, profiling y benchmarking
+    Gráfica comparación
+        Gran desfase en las tareas más difíciles
+
+Desarrollo
+    Preparar las herramientas necesarias
+        Compilación
+            GCC
+                Nativo
+                Optimización
+                Vectorización
+            CMake
+                Construcción automática
+                Multi-plataforma
+        Plataformas
+            Tabla de specs simplificada
+                Arquitectura
+                cores
+                hilos
+                memoria
+        Profiling
+            Perf
+                Encontrar cuellos de botella por CPU
+                Consumo CPU por función e instrucción
+            Intel Advisor
+                Encontrar cuellos de botella por RAM
+                Recomendaciones de optimizaciones
+        Benchmarking
+            Lanzamiento de pruebas de rendimiento y escalabilidad
+                Script Bash
+                    Lanzado manualmente
+                    SLURM en FT3
+                Con distintas configuraciones de:
+                    Carga de trabajo
+                        Número de cuerpos simulados
+                        Escena simulada
+                    Número de hilos
+            Comparación de resultados
+                Gráfica Tiempo ciclo de simulación x cuerpos x hilos
+
+    Desarrollo de la demo técnica
+        Partir de la demo ya provista por Box2D-lite
+        Adaptarla a Raspberry Pi
+            OpenGL, GLUT, headless
+        Añadir escenas para estresar el motor
+            Rúbik
+            Antigravedad
+            Cadenas
+            Atacar distintas debilidades
+        Parametrizar el programa
+            Carga de trabajo
+            Duración de simulación
+        Instrumentar el motor
+            Medir duración media de los ciclos de simulación
+
+    Primera iteración: Optimización en la broadphase
+        1º problema: Usar un único diccionario de árbitros por mundo.
+            Por cada comprobación de colisión, hay que consultar y modificar el diccionario para actualizarlo.
+            Bajo rendimiento del diccionario al haber muchas colisiones.
+        1ª solución: Distribuir el diccionario por cuerpo.
+            Almacenar en cada uno los árbitros que lo vigilan.
+            Mejor rendimiento al usar diccionarios más pequeños.
+
+        2º problema: Comprobación de colisión de todos los pares de cuerpos.
+            Cada comprobación es cara.
+            Sobre todo al haber muchos cuerpos separados.
+        2ª solución: Evitar comprobar colisión con cuerpos lejanos
+            Buscar una implementación de DBVH
+            Usarla para obtener los pares de cuerpos candidatos a colisionar por proximidad
+            Menor número de comprobaciones
+
+    Segunda iteración: Paralelización del motor
+        Paralelización de bucles con OpenMP
+            Sencillo
+            Sin muchos cambios en el código
+            Multi-plataforma
+
+        Paralelizar fases más costosas
+            Bucle de broadphase
+                Sin dependencias entre iteraciones gracias a la anterior solución.
+            
+            Bucles de resolución de restricciones
+                Con dependencias entre iteraciones (velocidad de los cuerpos)
+                Resuelto con lectura y actualización atómica.
+
+        Paralelizar el resto de fases
+            Bucle de aplicación de fuerza y bucle de actualización de posiciones
+                No son muy caros
+                Pero sin dependencias entre iteraciones
+                Mayor impacto al aumentar la carga de trabajo
+
+    Tercera iteración: Mejora del índice espacial
+        Problema: Las funciones del DBVH son las más costosas ahora
+            Mayor rendimiento pero sin posibilidad de seguir mejorando
+            Requeriría optimizar la implementación DBVH
+
+        Solución: Sustituirlo por un mejor índice espacial (SAP)
+            Buscar una implementación de SAP (Box Pruning)
+            Integrarla y paralelizarla
+
+Demo
+
+Resultados
+
+    Speedup
+        Gráfica RPI1 y FT3
+        Sobre todo en cuerpos muy dispersos
+
+    Escalabilidad
+        Gráfica RPI1 y FT3
+        Rendimiento no mejora tanto por hilos
+        Las funciones secuenciales de los índices espaciales
+
+Conclusiones
+    Gran complejidad de los motores de físicas
+        Teórica y técnica
+
+    La broadphase es la fase más importante
+        Un buen índice espacial tiene un enorme impacto
+
+    OpenMP ofrece un buen speedup sin apenas cambios
+        Para mejorarlo aún más, se vuelve difícil
+
+    Optimizaciones clásicas siguen maracando una gran diferencia
+        Loop unrolling, branch pruning, float to fixed encoding
+
+Trabajos futuros
+    Mejorar resolución de restricciones (nueva fase más costosa)
+        Vectorización
+            De Arrays of Structure (AoS) a Structure of Arrays (SoA)
+            Entity Component System (ECS)
+        Mejor paralelización
+            Dividir espacio con una cuadrícula
+            Agrupar cuerpos por celdas
+            Asignar a cada hilo unas celdas
+            Menos dependecias y sincronizaciones
+
+    Mejorar más la broadphase (ahora segunda fase más costosa)
+        Box Pruning
+            Vectorizar comrpobación solapamiento de AABBs
+            Paralelizar con Multi-SAP (cuadricula espacial de SAPs)
+        Mejor implementación de DBVH
+        Filtrado de cuerpos inmóviles con un índice espacial estático
+
