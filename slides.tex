@@ -10,6 +10,1072 @@
 
 \maketitle
 
+\section{Contexto}
+
+\begin{frame}{¿Qué es un motor de físicas?}
+  Definición
+
+  \begin{columns}
+    \column{0.75\textwidth}{
+      \begin{itemize}
+        \item Ciencia:
+          \begin{itemize}
+            \item Aproximación iterativa de principios físicos.
+            \item Resolver colisiones de cuerpos, rígidos, blandos, y fluidos.
+          \end{itemize}
+        \item Ingeniería:
+          \begin{itemize}
+            \item Biblioteca para similar interacción física.
+            \item Realista y en tiempo real.
+          \end{itemize}
+        \item Videojuegos:
+          \begin{itemize}
+            \item Componente o extensión del motor gráfico.
+            \item Objetos con propiedades físicas.
+          \end{itemize}
+      \end{itemize}
+    }
+    \column{0.25\textwidth}{
+      \begin{figure}
+        \includegraphics[width=\textwidth]{fisicas}
+      \end{figure}
+    }
+  \end{columns}
+\end{frame}
+
+\begin{frame}{¿Qué es un motor de físicas?}
+  Origen
+
+  \begin{columns}
+    \column{0.7\textwidth}{
+      \begin{itemize}
+        \item Primeros videojuegos
+          \begin{itemize}
+            \item \textit{Pong}, \textit{Asteroids}.
+            \item Hardware muy simple.
+            \item Físicas básicas o pre-calculadas.
+          \end{itemize}
+        \item Formalización del motor de físicas
+          \begin{itemize}
+            \item \textit{Havok}, \textit{PhysX}.
+            \item Físicas avanzadas en tiempo real.
+            \item Cuerpos rígidos.
+          \end{itemize}
+        \item Actualidad
+          \begin{itemize}
+            \item Hardware más potente.
+            \item Físicas realistas interactivas.
+            \item Cuerpos blandos y fluidos.
+          \end{itemize}
+      \end{itemize}
+    }
+    \column{0.3\textwidth}{
+      \begin{figure}
+        \includegraphics[width=\textwidth]{asteroids}
+      \end{figure}
+      \begin{figure}
+        \includegraphics[width=\textwidth]{havok}
+      \end{figure}
+      \begin{figure}
+        \includegraphics[width=\textwidth]{fluido}
+      \end{figure}
+    }
+  \end{columns}
+\end{frame}
+
+\begin{frame}{¿Qué es un motor de físicas?}
+  Aplicaciones
+
+  \begin{columns}
+    \column{0.5\textwidth}{
+      \begin{itemize}
+        \item Videojuegos
+        \item Robótica
+        \item Conducción autónoma
+      \end{itemize}
+      \begin{figure}
+        \includegraphics[width=\textwidth]{auto-driving}
+      \end{figure}
+    }
+    \column{0.5\textwidth}{
+      \begin{figure}
+        \includegraphics[width=\textwidth]{angry-birds}
+      \end{figure}
+      \begin{figure}
+        \includegraphics[width=\textwidth]{robotica}
+      \end{figure}
+    }
+  \end{columns}
+\end{frame}
+
+\begin{frame}{¿Qué son los sistemas embebidos?}
+  \begin{columns}
+    \column{0.7\textwidth}{
+        Definición
+        \begin{itemize}
+          \item Pequeño ordenador.
+          \item Dedicado a una tarea.
+          \item Hardware limitado pero eficiente.
+          \item Programación bajo nivel.
+        \end{itemize}
+        Aplicaciones relevantes
+        \begin{itemize}
+          \item Videoconsolas.
+          \item Teléfonos móviles.
+          \item Robótica.
+        \end{itemize}
+    }
+    \column{0.3\textwidth}{
+      \begin{figure}
+        \includegraphics[width=\textwidth]{Raspberry_Pi_4_Model_B}
+      \end{figure}
+      \begin{figure}
+        \includegraphics[width=\textwidth]{game-boy}
+      \end{figure}
+    }
+  \end{columns}
+\end{frame}
+
+\section{Fundamentos}
+
+\subsection{Box2D-lite}
+
+\begin{frame}{¿Qué es Box2D-lite?}
+  \begin{columns}
+    \column{0.6\textwidth}{
+        Definición
+        \begin{itemize}
+          \item Motor de físicas de dos dimensiones.
+          \item Simula cuerpos rígidos y articulaciones.
+          \item Implementación limpia y simple.
+          \item Programado en \textit{C++}.
+        \end{itemize}
+        Origen
+        \begin{itemize}
+          \item Desarrollado por Erin Catto en 2006.
+          \item Presentado en la \textit{Game Development Conference}.
+          \item Prueba de concepto.
+        \end{itemize}
+    }
+    \column{0.4\textwidth}{
+      \begin{figure}
+        \includegraphics[width=0.5\textwidth]{box2d-logo}
+      \end{figure}
+      \begin{figure}
+        \includegraphics[width=\textwidth]{box2d-screenshot}
+      \end{figure}
+    }
+  \end{columns}
+\end{frame}
+
+\begin{frame}{¿Qué elementos tiene Box2D-lite?}
+  \begin{figure}
+    \includegraphics[width=0.9\textwidth]{mundo}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{Mundo}
+  \begin{lstlisting}[style=c,gobble=2]
+    struct World
+    {
+      std::vector<Body*> bodies;    // Cuerpos rigidos
+      std::vector<Joint*> joints;   // Arbitros de articulacion
+      std::map<ArbiterKey, Arbiter>
+        arbiters;                   // Arbitros de colision
+
+      Vec2 gravity;
+      int iterations;
+    };
+
+    struct ArbiterKey
+    {
+      Body* body1;
+      Body* body2;
+    };
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}{Cuerpo rígido}
+  \begin{columns}
+    \column{0.3\textwidth}{
+      \begin{figure}
+        \includegraphics[scale=0.3]{CajaPosicion}
+        \caption*{Posición y rotación.}
+      \end{figure}
+      \begin{figure}
+        \includegraphics[scale=0.3]{CajaMasa}
+        \caption*{Masa.}
+      \end{figure}
+    }
+    \column{0.3\textwidth}{
+      \begin{figure}
+        \includegraphics[scale=0.3]{CajaVelocidad}
+        \caption*{Velocidad lineal y angular.}
+      \end{figure}
+      \begin{figure}
+        \includegraphics[scale=0.3]{CajaInercia}
+        \caption*{Momento de inercia.}
+      \end{figure}
+    }
+    \column{0.3\textwidth}{
+      \begin{figure}
+        \includegraphics[scale=0.3]{CajaDimensiones}
+        \caption*{Alto y ancho.}
+      \end{figure}
+      \begin{figure}
+        \includegraphics[scale=0.3]{CajaFriccion}
+        \caption*{Coeficiente de rozamiento.}
+      \end{figure}
+    }
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Cuerpo rígido}
+  \begin{lstlisting}[style=c,gobble=2]
+    struct Body
+    {
+      Vec2 position;          // Estado
+      float rotation;         //
+      Vec2 velocity;          //
+      float angularVelocity;  //
+
+      Vec2 width;             // Propiedades de la caja
+      float friction;         //
+      float mass, invMass;    //
+      float I, invI;          //
+
+      Vec2 force;             // Fuerzas externas aplicadas 
+      float torque;           //
+    };
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}{Árbitro de colisión}
+  \begin{columns}
+    \column{0.5\textwidth}{
+      \begin{itemize}
+        \item Vigilar la colisión entre dos cuerpos.
+        \item Almacenar sus puntos de contacto.
+        \item Registrar impulsos aplicados.
+        \item Persistir entre ciclos de simulación (mientras colisionen).
+      \end{itemize}
+    }
+    \column{0.5\textwidth}{
+      \begin{figure}
+        \includegraphics[width=\textwidth]{arbitro}
+      \end{figure}
+    }
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Árbitro de colisión}
+  \begin{lstlisting}[style=c,gobble=2]
+    struct Arbiter
+    {
+      Body* body1;          // Conectividad
+      Body* body2;          //
+
+      float friction;       // Fricción combinada
+
+      Contact contacts[2];  // Datos run-time
+      int numContacts;      //
+    };
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}{Árbitro de articulación}
+  \begin{columns}
+    \column{0.5\textwidth}{
+      \begin{itemize}
+        \item Rotar libremente dos cuerpos sobre una articulación.
+        \item Almacenar el punto de la unión.
+        \item Registrar impulsos aplicados.
+        \item Persistir entre ciclos de simulación (permanente).
+      \end{itemize}
+    }
+    \column{0.5\textwidth}{
+      \begin{figure}
+        \includegraphics[width=0.6\textwidth]{articulacion}
+      \end{figure}
+    }
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Árbitro de articulación}
+  \begin{lstlisting}[style=c,gobble=2]
+    struct Joint
+    {
+      Body* body1;                        // Conectividad
+      Body* body2;                        //
+
+      Vec2 localAnchor1, localAnchor2;    // Separación a la
+                                          // articulación
+
+      // ... datos run-time
+    };
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}{¿Cómo funciona Box2D-lite?}
+  \begin{figure}
+    \includegraphics[width=\textwidth]{FlujoMotorFisicas}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Colisión}
+  Objetivos
+  \begin{itemize}
+    \item Encontrar los pares de cuerpos solapantes.
+    \item Crear los árbitros de colisión de nuevos pares.
+    \item Actualizar los árbitros existentes.
+  \end{itemize}
+  Fases
+  \begin{columns}[t]
+    \column{0.4\textwidth}{
+      \textit{Broad-phase}
+      \begin{figure}
+        \includegraphics[width=0.7\textwidth]{BroadPhase}
+      \end{figure}
+    }
+    \column{0.4\textwidth}{
+    \textit{Narrow-phase}
+      \begin{figure}
+        \includegraphics[width=0.5\textwidth]{NarrowPhase}
+      \end{figure}
+    }
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Aplicar fuerzas}
+  Objetivos
+  \begin{itemize}
+    \item Actualizar las velocidades de los cuerpos.
+    \item En base a:
+    \begin{itemize}
+      \item Duración del ciclo de simulación.
+      \item Fuerzas externas.
+      \item Velocidad anterior.
+    \end{itemize}
+  \end{itemize}
+  Cálculo (método de Euler y 2ª ley de Newton)
+  \begin{columns}[t]
+    \column{0.6\textwidth}{
+      \begin{align*} 
+        v(t + \Delta t) &= v(t) + \Delta t \cdot m^{-1} \cdot f(t + \Delta t) \\
+        \omega(t + \Delta t) &= \omega(t) + \Delta t \cdot I^{-1} \cdot \tau(t + \Delta t)
+      \end{align*}
+    }
+    \column{0.4\textwidth}{
+      \begin{itemize}
+        \item[$\Delta t$]: Duración ciclo.
+        \item[$f$]: Fuerza.
+        \item[$\tau$]: Torque.
+      \end{itemize}
+    }
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Resolver restricciones: Colisiones}
+  \begin{columns}
+    \column{0.75\textwidth}{
+    Objetivos
+    \begin{itemize}
+      \item Por cada árbitro de colisión:
+      \begin{itemize}
+        \item Calcular el impulso para evitar la penetración.
+        \item Aplicar su fuerza normal y tangencial.
+      \end{itemize}
+    \end{itemize}
+    Calculo (3ª ley de Newton)
+    \begin{itemize}
+      \item Velocidad relativa al punto de contacto:
+      \begin{align*}
+        \Delta v &= (v_2 + \omega_2 \times r_2) - (v_1 + \omega_1 \times r_1)
+      \end{align*}
+      \item Velocidad sobre el vector normal:
+      \begin{align*}
+        v_n &= \Delta v \cdot n
+      \end{align*}
+      \item Restricción de no-penetración:
+      \begin{align*}
+        v_n >= 0
+      \end{align*}
+    \end{itemize}
+
+  }
+  \column{0.25\textwidth}{
+    \begin{figure}
+      \includegraphics[scale=0.25]{CajaContacto1}
+    \end{figure}
+    \begin{figure}
+      \includegraphics[scale=0.25]{CajaContacto2}
+    \end{figure}
+  }
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Resolver restricciones: Articulaciones}
+  \begin{columns}
+    \column{0.75\textwidth}{
+    Objetivos
+    \begin{itemize}
+      \item Por cada árbitro de colisión:
+      \begin{itemize}
+        \item Calcular el impulso para evitar la separación.
+        \item Aplicar su fuerza normal y tangencial.
+      \end{itemize}
+    \end{itemize}
+    Calculo (3ª ley de Newton)
+    \begin{itemize}
+      \item Velocidad relativa al punto de rotación:
+      \begin{align*}
+        \Delta v &= (v_2 + \omega_2 \times r_2) - (v_1 + \omega_1 \times r_1)
+      \end{align*}
+      \item Restricción de no-separación:
+      \begin{align*}
+        \Delta v = 0
+      \end{align*}
+    \end{itemize}
+
+  }
+  \column{0.25\textwidth}{
+    \begin{figure}
+      \includegraphics[scale=0.25]{CajaArticulacion}
+    \end{figure}
+    \begin{figure}
+      \includegraphics[scale=0.25]{ArticulacionSeparacion}
+    \end{figure}
+  }
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Actualizar posiciones}
+  Objetivos
+  \begin{itemize}
+    \item Actualizar las posiciones de los cuerpos.
+    \item En base a:
+    \begin{itemize}
+      \item Duración del ciclo de simulación.
+      \item Velocidad actual.
+      \item Posición anterior.
+    \end{itemize}
+  \end{itemize}
+  Cálculo (método de Euler)
+  \begin{columns}[t]
+    \column{0.6\textwidth}{
+      \begin{align*} 
+          x(t + \Delta t) &= x(t) + \Delta t \cdot v(t + \Delta t) \\
+          \phi(t + \Delta t) &= \phi(t) + \Delta t \cdot \omega(t + \Delta t)
+      \end{align*}
+    }
+    \column{0.4\textwidth}{
+      \begin{itemize}
+        \item[$\Delta t$]: Duración ciclo.
+        \item[$v$]: Velocidad lineal.
+        \item[$\omega$]: Velocidad angular.
+      \end{itemize}
+    }
+  \end{columns}
+\end{frame}
+
+\subsection{Índices espaciales}
+
+\begin{frame}{¿Qué es un índice espacial?}
+  Definición
+  \begin{itemize}
+    \item Estructura de aceleración para consultas espaciales.
+    \item Filtrar las geometrías en un espacio \emph{2D} o 3D por área.
+  \end{itemize}
+  Aplicaciones
+  \begin{itemize}
+    \item Sistemas de Información Geográfica.
+    \item Computación gráfica (\textit{Ray Trancing}).
+    \item \emph{Motores de físicas} y gráficos.
+  \end{itemize}
+  Tipos
+  \begin{itemize}
+    \item Estáticos (geometrías quietas):
+    \begin{itemize}
+      \item \textit{Octrees/Quadtrees}, \textit{Bounding Volume Hierarchy}, \textit{Kd-Trees}, \ldots
+    \end{itemize}
+    \item Dinámicos (geometrías en movimiento):
+    \begin{itemize}
+      \item \textit{\textbf{Dynamic Bounding Volume Hierarchy}}, \textit{\textbf{Sweep and Prune}}, \ldots
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\textit{Bounding Volume Hierarchy}}
+  \begin{figure}
+    \includegraphics[width=0.9\textwidth]{BVH-build-1}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\textit{Bounding Volume Hierarchy}}
+  \begin{figure}
+    \includegraphics[width=0.9\textwidth]{BVH-build-2}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\textit{Bounding Volume Hierarchy}}
+  \begin{figure}
+    \includegraphics[width=0.9\textwidth]{BVH-build-3}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\textit{Bounding Volume Hierarchy}}
+  \begin{figure}
+    \includegraphics[width=0.9\textwidth]{BVH-build-4}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\textit{Bounding Volume Hierarchy}}
+  \begin{figure}
+    \includegraphics[width=0.9\textwidth]{BVH-build-5}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\textit{Bounding Volume Hierarchy}}
+  \begin{figure}
+    \includegraphics[width=0.9\textwidth]{BVH-build-6}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\textit{Dynamic Bounding Volume Hierarchy}}
+  Dinamizar \textit{Bounding Volume Hierarchy} estático
+  \begin{itemize}
+    \item Reinsertar los cuerpos que se han movido.
+    \item Reajustar los nodos ancestros.
+    \item \textit{Enlarged Axis Aligned Bounding Box}.
+  \end{itemize}
+  \begin{figure}
+    \includegraphics[width=0.9\textwidth]{AABBAmpliadaMovida}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\textit{Sweep and Prune}}
+  \begin{columns}
+    \column{0.5\textwidth}{
+      \begin{figure}
+        \includegraphics[scale=0.4]{SAPProyeccion}
+      \end{figure}
+    }
+    \column{0.4\textwidth}{
+      \begin{figure}
+        \includegraphics[scale=0.4]{SAPProyeccion1}
+      \end{figure}
+    }
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\textit{Sweep and Prune}}
+  \begin{quote}
+    Especializado para la \textit{broad-phase}.
+  \end{quote}
+
+  Algoritmo
+  \begin{itemize}
+    \item Guardar la coordenada mínima y máxima de cada cuerpo en cada eje.
+    \item Ordenar la lista de coordenadas de cada eje.
+    \item Detectar los pares de geometrías solapantes.
+    \begin{itemize}
+      \item Coordenada de un cuerpo dentro de la mínima y máxima de otro.
+      \item Solapamiento si pasa en todos los ejes.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Objetivos y motivaciones}
+
+\begin{frame}{Mejorar el rendimiento de Box2D-lite}
+  ¿Porqué?
+  \begin{itemize}
+    \item Buena documentación.
+    \item Código fuente limpio y comprensible.
+    \item Alto coste computacional.
+    \item Carente de muchas optimizaciones.
+    \item No aprovecha las arquitecturas multi-núcleo.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Mejorar el rendimiento de Box2D-lite}
+  Resultados
+  \begin{itemize}
+    \item Demostrar y refinar conocimientos.
+    \begin{itemize}
+      \item Optimización y paralelización.
+    \end{itemize}
+    \item Permitir simular mayor cantidad de cuerpos.
+    \begin{itemize}
+      \item Videojuegos más detallados físicamente.
+    \end{itemize}
+    \item Ocupar menos tiempo CPU por fotograma.
+    \begin{itemize}
+      \item Lógica, IA, y gráficos duran cada vez más.
+    \end{itemize}
+    \item Ejecutar el motor en plataformas más modestas.
+    \begin{itemize}
+      \item Componentes cada vez más caros.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Optimizarlo para sistemas embebidos}
+  ¿Porqué?
+  \begin{itemize}
+    \item Mejoras de rendimiento más notorias.
+    \item Mayor control del hardware.
+    \item Arquitectura más simple y fácil de entender.
+  \end{itemize}
+  Resultados
+  \begin{itemize}
+    \item Ejecutar el motor en arquitecturas ARM.
+    \begin{itemize}
+      \item Robótica.
+      \item Videojuegos móviles.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Metodología y planificación}
+
+\begin{frame}{Metodología}
+  ¿Cuál se escogió?
+  \begin{itemize}
+    \item Metodología ágil: Incremental e iterativa.
+  \end{itemize}
+  ¿Porqué se escogió?
+  \begin{itemize}
+    \item Proyecto de dimensiones desconocidas.
+    \item Desarrollo fácilmente separable por iteraciones.
+    \item Tener en todo momento una versión funcional.
+  \end{itemize}
+  ¿Cómo se aplicó?
+  \begin{columns}
+    \column{0.6\textwidth}{
+      \begin{itemize}
+        \item Analizar y desarrollar las tareas iniciales.
+        \item Por cada iteración:
+          \begin{enumerate}
+            \item Analizar cuellos de botella.
+            \item Investigar soluciones.
+            \item Implementar soluciones.
+            \item Medir mejora de rendimiento.
+          \end{enumerate}
+      \end{itemize}
+    }
+    \column{0.4\textwidth}{
+      \begin{figure}
+        \includegraphics[width=\textwidth]{modelo-espiral}
+      \end{figure}
+    }
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Planificación inicial}
+  \begin{itemize}
+    \item Estudiar Box2D-lite.
+    \begin{itemize}
+      \item Funcionamiento teórico y técnico.
+    \end{itemize}
+    \item Analizar cuellos de botella.
+    \begin{itemize}
+      \item Principales \textit{hotspots} que mejorar.
+    \end{itemize}    
+    \item Investigar posibles soluciones.
+    \begin{itemize}
+      \item Técnicas de optimización y paralelización.
+    \end{itemize}
+    \item Desarrollar demo técnica.
+    \begin{itemize}
+      \item Programa de prueba de funcionamiento y rendimiento.
+    \end{itemize}
+    \item Preparar las herramientas necesarias.
+    \begin{itemize}
+      \item Compilación, plataformas, \textit{profiling} y \textit{benchmarking}.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Planificación final}
+  \begin{figure}
+    \includegraphics[width=\textwidth]{planificacion}
+  \end{figure}
+\end{frame}
+
+\section{Desarrollo}
+
+\subsection{Preparación de herramientas}
+
+\begin{frame}{Compilación}
+  \textit{GCC}
+  \begin{columns}
+    \column{0.5\textwidth}{
+      \begin{itemize}
+        \item Libre
+        \item Optimización
+        \item Vectorización
+        \item Multi-arquitectura
+      \end{itemize}
+    }
+    \column{0.4\textwidth}{
+      \begin{figure}
+        \includegraphics[width=0.6\textwidth]{GCC}
+      \end{figure}
+    }
+  \end{columns}
+  \textit{CMake}
+  \begin{columns}
+    \column{0.5\textwidth}{
+      \begin{itemize}
+        \item Construcción automática
+        \item Multi-plataforma
+      \end{itemize}
+    }
+    \column{0.4\textwidth}{
+      \begin{figure}
+        \includegraphics[width=0.6\textwidth]{CMake}
+      \end{figure}
+    }
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Plataformas}
+  \begin{table}[]
+  \begin{tabular}{lllll}
+  \textbf{}                                                                             & \textbf{RPI1}\footnote{Raspberry Pi 1B.}    & \textbf{RPI4}\footnote{Raspberry Pi 4B.}    & \textbf{PC}\footnote{Equipo de desarrollo,}                                                            & \textbf{FT3}\footnote{Nodo de la partición ``viz'' del supercomputador Finisterrae III.}                                                                   \\ \cline{2-5} 
+  \textbf{Nombre CPU}                                                                   & \textit{BCM2835} & \textit{BCM2711} & \textit{\begin{tabular}[c]{@{}l@{}}Intel Core\\ i5-4300U\end{tabular}} & \textit{\begin{tabular}[c]{@{}l@{}}Intel Xeon\\ Platinum\\ 8352Y\end{tabular}} \\ \hline
+  \textbf{Arquitectura CPU}                                                             & \textit{armv6l}  & \textit{aarch64} & \textit{x86\_64}                                                       & \textit{x86\_64}                                                               \\ \hline
+  \textbf{\begin{tabular}[c]{@{}l@{}}Frecuencia máxima\\ CPU\end{tabular}}              & 700MHz           & 1500MHz          & 2.9GHz                                                                 & 3.4GHz                                                                         \\ \hline
+  \textbf{\begin{tabular}[c]{@{}l@{}}Número de hilos\\ físicos por socket\end{tabular}} & 1                & 4                & 4                                                                      & 32                                                                             \\ \hline
+  \textbf{Memoria RAM}                                                                  & 512MB            & 4GB              & 16GB                                                                   & 512GB                                                                          \\ \hline
+  \textbf{Vectorización}                                                                & \textit{vfp}     & \textit{neon}    & \textit{avx2}                                                          & \textit{avx512}                                                               
+  \end{tabular}
+  \end{table}
+\end{frame}
+
+\begin{frame}{Profiling}
+  \textit{Perf}
+  \begin{columns}
+    \column{0.5\textwidth}{
+      \begin{itemize}
+        \item Encontrar cuellos de botella por rendimiento CPU.
+        \item Mostrar consumo CPU por función e instrucción.
+      \end{itemize}
+    }
+    \column{0.5\textwidth}{
+      \begin{table}[]
+      \scriptsize
+      \begin{tabular}{llll}
+      \textbf{\textit{Children}} & \textbf{\textit{Self}} & \textbf{\textit{Symbol}} \\ \cline{1-3} 
+      43,91\% & 42,54\% & \texttt{Collide} \\ \hline
+      23,06\% & 20,56\% & \texttt{\_\_sincosf\_fma} \\ \hline
+      22,17\% & 19,76\% & \texttt{Arbiter::Arbiter} \\ \hline
+      14,75\% & 12,71\% & \texttt{World::BroadPhase} \\ \hline
+      \end{tabular}
+      \end{table}
+    }
+  \end{columns}
+  \textit{Intel Advisor}
+  \begin{columns}
+    \column{0.5\textwidth}{
+      \begin{itemize}
+        \item Encontrar cuellos de botella por rendimiento CPU.
+        \item Mostrar consumo CPU por función e instrucción.
+      \end{itemize}
+    }
+    \column{0.5\textwidth}{
+      \begin{figure}
+        \includegraphics[width=0.8\textwidth]{advisor}
+      \end{figure}
+    }
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Profiling}
+  \begin{columns}
+    \column{0.6\textwidth}{
+      Lanzamiento de pruebas de rendimiento y escalabilidad
+      \begin{itemize}
+        \item Manualmente con \textit{Bash}.
+        \item Por \textit{batches} con SLURM en FT3.
+        \item Con distintas configuraciones de:
+        \begin{itemize}
+          \item Carga de trabajo (cuerpos y escena simulados).
+          \item Número de hilos.
+        \end{itemize}
+      \end{itemize}
+    }
+    \column{0.4\textwidth}{
+      Resultados
+      \begin{figure}
+        \includegraphics[width=0.9\textwidth]{benchmark}
+      \end{figure}
+    }
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Programa para probar del motor}
+  \begin{enumerate}
+    \item Partir de la demo ya provista por Box2D-lite.
+    \item Adaptarla a dispositivos \textit{Raspberry Pi}.
+    \item Añadir escenas para estresar el motor.
+    \begin{itemize}
+      \item Rúbik (cuerpos cayendo).
+      \item Antigravedad (cuerpos flotando).
+      \item Cadenas (cuerpos conectados).
+    \end{itemize}
+    \item Parametrizar el programa.
+    \begin{itemize}
+      \item Carga de trabajo.
+      \item Duración de simulación.
+    \end{itemize}
+    \item Parametrizar el programa.
+    \begin{itemize}
+      \item Medir duración media de los ciclos de simulación.
+    \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+\subsection{Iteraciones}
+
+\begin{frame}{Primera iteración: Optimización en la broadphase}
+  \begin{table}[]
+  \begin{tabular}{lll}
+  \textbf{\textit{Children}} & \textbf{\textit{Self}} & \textbf{\textit{Symbol}} \\ \cline{1-3}
+  \rowcolor{rojosuave}
+  34,44\% & 32,66\% & \texttt{Collide} \\ \hline
+  \rowcolor{rojosuave}
+  19,85\% & 19,85\% & \texttt{std::\_Rb\_tree\textless{}...\textgreater{}::equal\_range} \\ \hline
+  18,35\% & 17,26\% & \texttt{\_\_sincosf\_fma} \\ \hline
+  16,51\% & 13,37\% & \texttt{World::BroadPhase} \\ \hline
+  13,49\% & 13,01\% & \texttt{Arbiter::Arbiter} \\ \hline
+  \end{tabular}
+  \end{table}
+\end{frame}
+
+\begin{frame}{Primera iteración: Optimización en la broadphase}
+  1º problema: Usar un único diccionario de árbitros por mundo.
+  \begin{itemize}
+    \item Por cada comprobación de colisión, hay que consultar y modificar el diccionario para actualizarlo.
+    \item Bajo rendimiento del diccionario al haber muchas colisiones.
+  \end{itemize}
+  1ª solución: Distribuir el diccionario por cuerpo.
+  \begin{itemize}
+    \item Almacenar en cada uno los árbitros que lo vigilan.
+    \item Mejor rendimiento al usar diccionarios más pequeños.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Primera iteración: Optimización en la broadphase}
+  2º problema: Comprobación de colisión de todos los pares de cuerpos.
+  \begin{itemize}
+    \item Cada comprobación es cara.
+    \item Sobre todo al haber muchos cuerpos dispersos.
+  \end{itemize}
+  2ª solución: Evitar comprobar colisión con cuerpos lejanos.
+  \begin{itemize}
+    \item Usar una implementación de índice espacial DBVH.
+    \item Por cada cuerpo, obtener los próximos.
+    \item Comprobar colisión solo con ellos.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Segunda iteración: Paralelización del motor}
+  \begin{table}[]
+  \begin{tabular}{lll}
+  \textbf{\textit{Children}} & \textbf{\textit{Self}} & \textbf{\textit{Symbol}} \\ \cline{1-3}
+  40,38\% & 3,45\% & \texttt{World::BroadPhase} \\ \hline
+  \rowcolor{rojosuave}
+  35,87\% & 35,20\% & \texttt{bvh::bvh\_t::find\_overlaps} \\ \hline
+  23,39\% & 3,49\% & \texttt{World::Step} \\ \hline
+  \rowcolor{rojosuave}
+  18,75\% & 18,65\% & \texttt{Arbiter::ApplyImpulse} \\ \hline
+  14,87\% & 0,07\% & \texttt{bvh::bvh\_t::\_insert} \\ \hline
+  \rowcolor{rojosuave}
+  14,11\% & 14,04\% & \texttt{bvh::bvh\_t::\_find\_best\_sibling} \\ \hline
+  6,42\% & 6,18\% & \texttt{Collide} \\ \hline
+  \end{tabular}
+  \end{table}
+\end{frame}
+
+\begin{frame}[fragile]{Segunda iteración: Paralelización del motor}
+  \begin{columns}
+    \column{0.7\textwidth}{
+      Paralelización de bucles con OpenMP:
+      \begin{itemize}
+        \item Fácil de implementar en bucles sencillos.
+        \item Sin muchos cambios en el código.
+        \item Multi-plataforma.
+      \end{itemize}
+    }
+    \column{0.3\textwidth}{
+      \begin{figure}
+        \includegraphics[width=0.8\textwidth]{OpenMP_logo}
+      \end{figure}
+    }
+  \end{columns}
+  Ejemplo
+  \begin{lstlisting}[basicstyle=\scriptsize,style=c,gobble=2]
+    #pragma omp for schedule(static) 
+    for (int i = 0; i < (int)bodies.size(); ++i) {
+      Body* b = bodies[i];
+      b->velocity += dt * (gravity + b->invMass * b->force);
+      b->angularVelocity += dt * b->invI * b->torque;
+    }
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}{Segunda iteración: Paralelización del motor}
+  Paralelización de fases más costosas:
+  \begin{itemize}
+    \item Bucle de detección de colisiones
+    \begin{itemize}
+      \item Sin dependencias entre iteraciones gracias a la anterior iteración.
+    \end{itemize}
+    \item Bucles de resolución de restricciones
+    \begin{itemize}
+      \item Con dependencias entre iteraciones (velocidad de los cuerpos).
+      \item Resuelto con lectura y actualización atómica.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Segunda iteración: Paralelización del motor}
+  Paralelización del resto de fases:
+    \begin{itemize}
+    \item Bucle de aplicación de fuerza y bucle de actualización de posiciones
+    \begin{itemize}
+      \item No son muy caros.
+      \item Pero sin dependencias entre iteraciones.
+      \item Mayor impacto al aumentar la carga de trabajo.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Tercera iteración: Mejora del índice espacial}
+\begin{table}[]
+\begin{tabular}{lll}
+\textbf{\textit{Children}} & \textbf{\textit{Self}} & \textbf{\textit{Symbol}} \\ \cline{1-3} 
+48,29\% & 48,07\% & \texttt{omp\_get\_num\_procs} \\ \hline
+19,03\% & 2,18\% & \texttt{World::BroadPhase} \\ \hline
+\rowcolor{rojosuave}
+16,50\% & 16,10\% & \texttt{bvh::bvh\_t::find\_overlaps} \\ \hline
+11,52\% & 11,49\% & \texttt{Arbiter::ApplyImpulse} \\ \hline
+9,95\% & 0,24\% & \texttt{World::Step} \\ \hline
+\rowcolor{rojosuave}
+7,98\% & 0,00\% & \texttt{bvh::bvh\_t::\_insert} \\ \hline
+\rowcolor{rojosuave}
+7,30\% & 7,29\% & \texttt{bvh::bvh\_t::\_find\_best\_sibling} \\ \hline
+3,58\% & 3,43\% & \texttt{Collide} \\ \hline
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}{Tercera iteración: Mejora del índice espacial}
+  Problema: Las funciones del DBVH son las más costosas ahora
+  \begin{itemize}
+    \item Mejor rendimiento pero sin posibilidad de seguir mejorando.
+    \item Requeriría optimizar la implementación de DBVH.
+  \end{itemize}
+  Solución: Sustituirlo por un mejor índice espacial
+  \begin{itemize}
+    \item Usar la implementación \textit{Box Pruning} de SAP.
+    \item Integrarla y paralelizarla.
+  \end{itemize}
+\end{frame}
+
+\section{Resultados}
+
+\begin{frame}{\textit{Speedup} en la \textit{Raspberry Pi 4B}}
+  \begin{figure}
+    \includegraphics[width=\textwidth]{SpeedupRPI4}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\textit{Speedup} en el \textit{Finisterrae III}}
+  \begin{figure}
+    \includegraphics[width=\textwidth]{SpeedupFT3}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Escalabilidad en la \textit{Raspberry Pi 4B}}
+  \begin{figure}
+    \includegraphics[width=0.9\textwidth]{Results10RPI4}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Escalabilidad en el \textit{Finisterrae III}}
+  \begin{figure}
+    \includegraphics[width=0.9\textwidth]{Results10FT3}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Demostración de resultados}
+  Ejecutar el programa de prueba con:
+  \begin{itemize}
+    \item Escenas originales.
+    \item Sin/con gravedad.
+    \item Dibujando el árbol BVH.
+    \item La versión del motor tras cada iteración.
+    \item Distinto número de cuerpos y escena simulada.
+  \end{itemize}
+  Analizar tasa de FPS y duración del ciclo de simulación.
+\end{frame}
+
+\section{Conclusiones y trabajos futuros}
+
+\begin{frame}{Conclusiones}
+  \begin{itemize}
+    \item Gran complejidad de los motores de físicas
+    \begin{itemize}
+      \item Teórica y técnica.
+    \end{itemize}
+    \item La detección de colisión es la fase más importante
+    \begin{itemize}
+      \item Un buen índice espacial tiene un enorme impacto.
+    \end{itemize}
+    \item \textit{OpenMP} ofrece un buen \textit{speedup} sin apenas cambios
+    \begin{itemize}
+      \item Para mejorarlo aún más, se vuelve difícil.
+    \end{itemize}
+    \item Optimizaciones clásicas siguen marcando una gran diferencia
+    \begin{itemize}
+      \item \textit{Loop unrolling}, \textit{branch pruning}, \textit{float to fixed encoding} \ldots
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Trabajos futuros}
+  Mejorar resolución de restricciones (nueva fase más costosa).
+  \begin{itemize}
+    \item Vectorizar los cálculos:
+    \begin{itemize}
+      \item Usar Structure of Arrays (SoA) en vez de Arrays of Structure (AoS).
+      \item Aplicar el patrón de diseño \textit{Entity Component System} (ECS).
+    \end{itemize}
+    \item Mejorar la paralelización:
+    \begin{itemize}
+      \item Dividir espacio del mundo con una cuadrícula.
+      \item Agrupar cuerpos por celdas.
+      \item Repartir celdas entre los hilos.
+      \item Menos dependecias y sincronizaciones.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Trabajos futuros}
+  Mejorar la detección de colisiones (segunda fase más costosa).
+  \begin{itemize}
+    \item \textit{Box Pruning}
+    \begin{itemize}
+      \item Vectorizar comprobación solapamiento geometrías.
+      \item Paralelizar con Multi-SAP (híbrido cuadricula espacial y SAPs).
+    \end{itemize}
+    \item Mejor implementación de DBVH.
+    \item Usar un índice espacial estático para los cuerpos inmóviles.
+  \end{itemize}
+\end{frame}
 
 \appendix
 
