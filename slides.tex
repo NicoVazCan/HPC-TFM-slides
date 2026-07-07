@@ -14,8 +14,8 @@
 \section{Contexto}
 \note{Antes de empezar con el proyecto es necesario entender que son los motores de físicas y los sistemas embebidos.}
 
-\begin{frame}{¿Qué es un motor de físicas?}\usebeamercolor[fg]{normal text}
-  Definición
+\begin{frame}{¿Qué es un motor de físicas?}
+  \begin{block}{Definición}
   \begin{columns}
     \column{0.75\textwidth}
       \begin{itemize}
@@ -41,16 +41,18 @@
         \includegraphics[width=\textwidth]{fisicas}
       \end{figure}
   \end{columns}
+  \end{block}
   \note{
     ¿Qué es un motor de físicas?
     Es una aproximación iterativa para resolver las colisiones entre cuerpos rígidos, blandos y fluidos, mediante la aplicación de múltiples principios físicos.
   }
 \end{frame}
 
-\begin{frame}{¿Qué es un motor de físicas?}\usebeamercolor[fg]{normal text}
-  Origen
-  \begin{columns}
+\begin{frame}{¿Qué es un motor de físicas?}
+
+  \begin{columns}[t]
     \column{0.7\textwidth}{
+      \begin{block}{Origen}
       \begin{itemize}
         \item Primeros videojuegos
           \begin{itemize}
@@ -71,6 +73,7 @@
             \item Cuerpos blandos y fluidos.
           \end{itemize}
       \end{itemize}
+      \end{block}
     }
     \column{0.3\textwidth}{
       \begin{figure}
@@ -86,19 +89,23 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{¿Qué es un motor de físicas?}\usebeamercolor[fg]{normal text}
-  Aplicaciones
+\begin{frame}{¿Qué es un motor de físicas?}
 
-  \begin{columns}
+  \begin{columns}[b]
     \column{0.5\textwidth}{
+      \begin{block}{Aplicaciones}
       \begin{itemize}
         \item Videojuegos
         \item Robótica
         \item Conducción autónoma
       \end{itemize}
+
+      \vspace*{.5cm}
+      
       \begin{figure}
         \includegraphics[width=\textwidth]{auto-driving}
       \end{figure}
+      \end{block}
     }
     \column{0.5\textwidth}{
       \begin{figure}
@@ -107,26 +114,29 @@
       \begin{figure}
         \includegraphics[width=\textwidth]{robotica}
       \end{figure}
+      \vspace*{0cm}
     }
   \end{columns}
 \end{frame}
 
-\begin{frame}{¿Qué son los sistemas embebidos?}\usebeamercolor[fg]{normal text}
+\begin{frame}{¿Qué son los sistemas embebidos?}
   \begin{columns}
     \column{0.7\textwidth}{
-        Definición
+      \begin{block}{Definición}
         \begin{itemize}
           \item Pequeño ordenador.
           \item Dedicado a una tarea.
           \item Hardware limitado pero eficiente.
           \item Programación bajo nivel.
         \end{itemize}
-        Aplicaciones relevantes
+      \end{block}
+      \begin{block}{Aplicaciones relevantes}
         \begin{itemize}
           \item Videoconsolas.
           \item Teléfonos móviles.
           \item Robótica.
         \end{itemize}
+      \end{block}
     }
     \column{0.3\textwidth}{
       \begin{figure}
@@ -146,19 +156,21 @@
 \begin{frame}{¿Qué es Box2D-lite?}\usebeamercolor[fg]{normal text}
   \begin{columns}
     \column{0.6\textwidth}{
-        Definición
+      \begin{block}{Definición}
         \begin{itemize}
           \item Motor de físicas de dos dimensiones.
           \item Simula cuerpos rígidos y articulaciones.
           \item Implementación limpia y simple.
           \item Programado en \textit{C++}.
         \end{itemize}
-        Origen
+        \end{block}
+        \begin{block}{Origen}
         \begin{itemize}
           \item Desarrollado por Erin Catto en 2006.
           \item Presentado en la \textit{Game Development Conference}.
           \item Prueba de concepto.
         \end{itemize}
+        \end{block}
     }
     \column{0.4\textwidth}{
       \begin{figure}
