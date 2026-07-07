@@ -502,7 +502,7 @@
   \end{block}
 \end{frame}
 
-\subsection{Índices espaciales}
+\subsection{Estructuras de aceleración: Índices espaciales}
 
 \begin{frame}{¿Qué es un índice espacial?}\usebeamercolor[fg]{normal text}
   \begin{block}{Definición}
@@ -514,7 +514,7 @@
   \begin{block}{Aplicaciones}
   \begin{itemize}
     \item Sistemas de Información Geográfica.
-    \item Computación gráfica (\textit{Ray Trancing}).
+    \item Computación gráfica (\textit{Ray Tracing}).
     \item \emph{Motores de físicas} y gráficos.
   \end{itemize}
   \end{block}
@@ -712,28 +712,25 @@
 
 \begin{frame}{Planificación inicial}
   \begin{block}{Tareas previstas}
-  \begin{itemize}
+    \begin{itemize}
     \item Estudiar Box2D-lite.
-    \begin{itemize}
+      \begin{itemize}
       \item Funcionamiento teórico y técnico.
-    \end{itemize}
+      \end{itemize}
     \item Analizar cuellos de botella.
-    \begin{itemize}
+      \begin{itemize}
       \item Principales \textit{hotspots} que mejorar.
-    \end{itemize}
+      \end{itemize}
     \item Investigar posibles soluciones.
-    \begin{itemize}
+      \begin{itemize}
       \item Técnicas de optimización y paralelización.
-    \end{itemize}
-    \item Desarrollar demo técnica.
-    \begin{itemize}
-      \item Programa de prueba de funcionamiento y rendimiento.
-    \end{itemize}
+      \end{itemize}
     \item Preparar las herramientas necesarias.
-    \begin{itemize}
+      \begin{itemize}
       \item Compilación, plataformas, \textit{profiling} y \textit{benchmarking}.
+      \item Desarrollar programa de prueba de funcionamiento y rendimiento.
+      \end{itemize}
     \end{itemize}
-  \end{itemize}
   \end{block}
 \end{frame}
 
@@ -747,15 +744,14 @@
 
 \subsection{Preparación de herramientas}
 
-\begin{frame}{Compilación}\usebeamercolor[fg]{normal text}
-  \textit{GCC}
+\begin{frame}{Compilación}
+  \begin{block}{GCC}
+    \vspace*{-0.5cm}
   \begin{columns}
     \column{0.5\textwidth}{
       \begin{itemize}
-        \item Libre
-        \item Optimización
-        \item Vectorización
-        \item Multi-arquitectura
+        \item Libre y multi-arquitectura.
+        \item Disponible en mayoría de dispositivos.
       \end{itemize}
     }
     \column{0.4\textwidth}{
@@ -764,7 +760,8 @@
       \end{figure}
     }
   \end{columns}
-  \textit{CMake}
+  \end{block}
+  \begin{block}{CMake}
   \begin{columns}
     \column{0.5\textwidth}{
       \begin{itemize}
@@ -778,23 +775,35 @@
       \end{figure}
     }
   \end{columns}
+  \end{block}
 \end{frame}
 
-\begin{frame}{Plataformas}
-  \begin{table}[]
-  \begin{tabular}{lllll}
-  \textbf{}                                                                             & \textbf{RPI1}\footnote{Raspberry Pi 1B.}    & \textbf{RPI4}\footnote{Raspberry Pi 4B.}    & \textbf{PC}\footnote{Equipo de desarrollo,}                                                            & \textbf{FT3}\footnote{Nodo de la partición ``viz'' del supercomputador Finisterrae III.}                                                                   \\ \cline{2-5} 
-  \textbf{Nombre CPU}                                                                   & \textit{BCM2835} & \textit{BCM2711} & \textit{\begin{tabular}[c]{@{}l@{}}Intel Core\\ i5-4300U\end{tabular}} & \textit{\begin{tabular}[c]{@{}l@{}}Intel Xeon\\ Platinum\\ 8352Y\end{tabular}} \\ \hline
-  \textbf{Arquitectura CPU}                                                             & \textit{armv6l}  & \textit{aarch64} & \textit{x86\_64}                                                       & \textit{x86\_64}                                                               \\ \hline
-  \textbf{\begin{tabular}[c]{@{}l@{}}Frecuencia máxima\\ CPU\end{tabular}}              & 700MHz           & 1500MHz          & 2.9GHz                                                                 & 3.4GHz                                                                         \\ \hline
-  \textbf{\begin{tabular}[c]{@{}l@{}}Número de hilos\\ físicos por socket\end{tabular}} & 1                & 4                & 4                                                                      & 32                                                                             \\ \hline
-  \textbf{Memoria RAM}                                                                  & 512MB            & 4GB              & 16GB                                                                   & 512GB                                                                          \\ \hline
-  \textbf{Vectorización}                                                                & \textit{vfp}     & \textit{neon}    & \textit{avx2}                                                          & \textit{avx512}                                                               
+\begin{frame}{Plataformas de prueba}
+  \begin{table}
+    \begin{tabular}{lllll}
+      \toprule
+  \textbf{}                                                                             & \textbf{RPI1}    & \textbf{RPI4}    & \textbf{PC}                                                            & \textbf{FT3}                                                                   \\ \cmidrule(lr){2-5}
+  \textbf{Nombre CPU}                                                                   & \textit{BCM2835} & \textit{BCM2711} & \textit{\begin{tabular}[c]{@{}l@{}}Intel Core\\ i5-4300U\end{tabular}} & \textit{\begin{tabular}[c]{@{}l@{}}Intel Xeon\\ Platinum\\ 8352Y\end{tabular}} \\[.6cm]
+  \textbf{Arquitectura CPU}                                                             & \textit{armv6l}  & \textit{aarch64} & \textit{x86\_64}                                                       & \textit{x86\_64}                                                               \\[.2cm]
+  \textbf{\begin{tabular}[c]{@{}l@{}}Frecuencia máxima\\ CPU\end{tabular}}              & 700MHz           & 1500MHz          & 2.9GHz                                                                 & 3.4GHz                                                                         \\[.4cm]
+  \textbf{\begin{tabular}[c]{@{}l@{}}Número de hilos\\ físicos por socket\end{tabular}} & 1                & 4                & 4                                                                      & 32                                                                             \\[.4cm]
+  \textbf{Memoria RAM}                                                                  & 512MB            & 4GB              & 16GB                                                                   & 512GB                                                                          \\[.2cm]
+  \textbf{Vectorización}                                                                & \textit{vfp}     & \textit{neon}    & \textit{avx2}                                                          & \textit{avx512}                                                               \\
+  \bottomrule
   \end{tabular}
-  \end{table}
+\end{table}
+
+{
+  \footnotesize
+  \begin{tabbing}
+    RPI1: Raspberry Pi 1B. \qquad \= RPI4: Raspberry Pi 4B.\\
+    PC: Equipo de desarrollo. \> FT3: Nodo partición ``viz'' en supercomputador Finisterrae III.
+  \end{tabbing}
+}
+
 \end{frame}
 
-\begin{frame}{Profiling}
+\begin{frame}{Herramientas de \emph{profiling}}
   \begin{block}{Perf}
   \begin{columns}
     \column{0.5\textwidth}{
@@ -836,38 +845,44 @@
   \end{block}
 \end{frame}
 
-\begin{frame}{Benchmarking}
-  \begin{columns}
-    \column{0.6\textwidth}{
-      Lanzamiento de pruebas de rendimiento y escalabilidad
+\begin{frame}{\emph{Benchmarking}}
+  % \begin{columns}
+    % \column{0.6\textwidth}{
+    \begin{block}{Lanzamiento de pruebas de rendimiento y escalabilidad}
       \begin{itemize}
-        \item Manualmente con \textit{Bash}.
-        \item Por \textit{batches} con SLURM en FT3.
-        \item Con distintas configuraciones de:
+      \item Manualmente con \textit{Bash}.
+      \item Por \textit{batches} con SLURM en FT3.
+      \item Con distintas configuraciones de:
         \begin{itemize}
-          \item Carga de trabajo (cuerpos y escena simulados).
-          \item Número de hilos.
+        \item Carga de trabajo (cuerpos y escena simulados).
+        \item Número de hilos.
+        \end{itemize}
+      \item Métrica:
+        \begin{itemize}
+        \item Duración media ciclo simulación.
         \end{itemize}
       \end{itemize}
-    }
-    \column{0.4\textwidth}{
-      Resultados
-      \begin{figure}
-        \includegraphics[width=0.9\textwidth]{benchmark}
-      \end{figure}
-    }
-  \end{columns}
+    \end{block}
+    % }
+    %   \column{0.4\textwidth}{
+    %   \begin{block}{Resultados}
+    %     \begin{figure}
+    %       \includegraphics[width=0.9\textwidth]{benchmark}
+    %     \end{figure}
+    %   \end{block}
+    % }
+  %\end{columns}
 \end{frame}
 
-\begin{frame}{Programa para probar del motor}
+\begin{frame}{Desarrollo del programa de prueba}
   \begin{enumerate}
     \item Partir de la demo ya provista por Box2D-lite.
     \item Adaptarla a dispositivos \textit{Raspberry Pi}.
     \item Añadir escenas para estresar el motor.
     \begin{itemize}
-      \item Rubik (cuerpos cayendo).
-      \item Antigravedad (cuerpos flotando).
-      \item Cadenas (cuerpos conectados).
+      \item Rubik: cuerpos cayendo (Escena 10).
+      \item Antigravedad: cuerpos flotando (Escena 11).
+      \item Cadenas: cuerpos conectados (Escena 12).
     \end{itemize}
     \item Parametrizar el programa.
     \begin{itemize}
@@ -899,30 +914,39 @@
 \end{frame}
 
 \begin{frame}{Primera iteración: Optimización en la broadphase}\usebeamercolor[fg]{normal text}
-  1º problema: Usar un único diccionario de árbitros por mundo.
-  \begin{itemize}
+
+  \begin{block}{1º problema: Usar un único diccionario de árbitros por mundo}
+    \begin{itemize}
     \item Por cada comprobación de colisión, hay que consultar y modificar el diccionario para actualizarlo.
     \item Bajo rendimiento del diccionario al haber muchas colisiones.
-  \end{itemize}
-  1ª solución: Distribuir el diccionario por cuerpo.
-  \begin{itemize}
+    \end{itemize}
+  \end{block}
+
+  \begin{exampleblock}{1ª solución: Distribuir el diccionario por cuerpo}
+    \begin{itemize}
     \item Almacenar en cada uno los árbitros que lo vigilan.
     \item Mejor rendimiento al usar diccionarios más pequeños.
-  \end{itemize}
+    \end{itemize}
+  \end{exampleblock}
 \end{frame}
 
 \begin{frame}{Primera iteración: Optimización en la broadphase}\usebeamercolor[fg]{normal text}
-  2º problema: Comprobación de colisión de todos los pares de cuerpos.
-  \begin{itemize}
+
+  \begin{block}{2º problema: Comprobación de colisión de todos los
+      pares de cuerpos}
+    \begin{itemize}
     \item Cada comprobación es cara.
     \item Sobre todo al haber muchos cuerpos dispersos.
-  \end{itemize}
-  2ª solución: Evitar comprobar colisión con cuerpos lejanos.
+    \end{itemize}
+  \end{block}
+
+  \begin{exampleblock}{2ª solución: Evitar comprobar colisión con cuerpos lejanos}
   \begin{itemize}
     \item Usar una implementación de índice espacial DBVH.
     \item Por cada cuerpo, obtener los próximos.
     \item Comprobar colisión solo con ellos.
-  \end{itemize}
+    \end{itemize}
+  \end{exampleblock}
 \end{frame}
 
 \begin{frame}{Segunda iteración: Paralelización del motor}\usebeamercolor[fg]{normal text}
@@ -972,8 +996,8 @@
   \end{block}
 \end{frame}
 
-\begin{frame}{Segunda iteración: Paralelización del motor}\usebeamercolor[fg]{normal text}
-  Paralelización de fases más costosas:
+\begin{frame}{Segunda iteración: Paralelización del motor}
+  \begin{block}{Paralelización de fases más costosas}
   \begin{itemize}
     \item Bucle de detección de colisiones
     \begin{itemize}
@@ -985,10 +1009,11 @@
       \item Resuelto con lectura y actualización atómica.
     \end{itemize}
   \end{itemize}
+  \end{block}
 \end{frame}
 
-\begin{frame}{Segunda iteración: Paralelización del motor}\usebeamercolor[fg]{normal text}
-  Paralelización del resto de fases:
+\begin{frame}{Segunda iteración: Paralelización del motor}
+  \begin{block}{Paralelización del resto de fases}
     \begin{itemize}
     \item Bucle de aplicación de fuerza y bucle de actualización de posiciones
     \begin{itemize}
@@ -997,6 +1022,7 @@
       \item Mayor impacto al aumentar la carga de trabajo.
     \end{itemize}
   \end{itemize}
+  \end{block}
 \end{frame}
 
 \begin{frame}{Tercera iteración: Mejora del índice espacial}\usebeamercolor[fg]{normal text}
@@ -1018,60 +1044,67 @@
 \end{table}
 \end{frame}
 
-\begin{frame}{Tercera iteración: Mejora del índice espacial}\usebeamercolor[fg]{normal text}
-  Problema: Las funciones del DBVH son las más costosas ahora
+\begin{frame}{Tercera iteración: Mejora del índice espacial}
+  \begin{block}{Problema: Las funciones del DBVH son las más costosas ahora}
   \begin{itemize}
     \item Mejor rendimiento pero sin posibilidad de seguir mejorando.
     \item Requeriría optimizar la implementación de DBVH.
-  \end{itemize}
-  Solución: Sustituirlo por un mejor índice espacial
+    \end{itemize}
+  \end{block}
+  \begin{block}{Solución: Sustituirlo por un mejor índice espacial}
   \begin{itemize}
     \item Usar la implementación \textit{Box Pruning} de SAP.
     \item Integrarla y paralelizarla.
-  \end{itemize}
+    \end{itemize}
+  \end{block}
 \end{frame}
 
 \section{Resultados}
 
-\begin{frame}{\textit{Speedup}\usebeamercolor[fg]{normal text} en la \textit{Raspberry Pi 4B}}
+\begin{frame}{Rendimiento (\textit{Speedup}) en la \textit{Raspberry Pi 4B}}
   \begin{figure}
     \includegraphics[width=\textwidth]{SpeedupRPI4}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Speedup}\usebeamercolor[fg]{normal text} en el \textit{Finisterrae III}}
+\begin{frame}{Rendimiento (\textit{Speedup}) en el \textit{Finisterrae III}}
   \begin{figure}
     \includegraphics[width=\textwidth]{SpeedupFT3}
   \end{figure}
 \end{frame}
 
-\begin{frame}{Escalabilidad en la \textit{Raspberry Pi 4B}\usebeamercolor[fg]{normal text}}
+\begin{frame}{Escalabilidad en la \textit{Raspberry Pi 4B}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{Results10RPI4}
   \end{figure}
 \end{frame}
 
-\begin{frame}{Escalabilidad en el \textit{Finisterrae III}\usebeamercolor[fg]{normal text}}
+\begin{frame}{Escalabilidad en el \textit{Finisterrae III}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{Results10FT3}
   \end{figure}
 \end{frame}
 
-\begin{frame}{Demostración de resultados}\usebeamercolor[fg]{normal text}
-  Ejecutar el programa de prueba con:
+\begin{frame}{Demostración de resultados}
+
+  \begin{block}{1. Ejecución del programa de prueba con distintas configuraciones.}
   \begin{itemize}
     \item Escenas originales.
     \item Sin/con gravedad.
     \item Dibujando el árbol BVH.
     \item La versión del motor tras cada iteración.
     \item Distinto número de cuerpos y escena simulada.
-  \end{itemize}
-  Analizar tasa de FPS y duración del ciclo de simulación.
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{2. Analizar tasa de FPS y duración del ciclo de
+      simulación.}
+  \end{block}
 \end{frame}
 
 \section{Conclusiones y trabajos futuros}
 
-\begin{frame}{Conclusiones}\usebeamercolor[fg]{normal text}
+\begin{frame}{Conclusiones}
   \begin{itemize}
     \item Gran complejidad de los motores de físicas
     \begin{itemize}
@@ -1092,40 +1125,42 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Trabajos futuros}\usebeamercolor[fg]{normal text}
-  Mejorar resolución de restricciones (nueva fase más costosa).
-  \begin{itemize}
-    \item Vectorizar los cálculos:
+\begin{frame}{Trabajos futuros}
+  \begin{block}{Mejorar resolución de restricciones (nueva fase más costosa)}
     \begin{itemize}
+    \item Vectorizar los cálculos:
+      \begin{itemize}
       \item Usar Structure of Arrays (SoA) en vez de Arrays of Structure (AoS).
       \item Aplicar el patrón de diseño \textit{Entity Component System} (ECS).
-    \end{itemize}
+      \end{itemize}
     \item Mejorar la paralelización:
-    \begin{itemize}
+      \begin{itemize}
       \item Dividir espacio del mundo con una cuadrícula.
       \item Agrupar cuerpos por celdas.
       \item Repartir celdas entre los hilos.
       \item Menos dependecias y sincronizaciones.
+      \end{itemize}
     \end{itemize}
-  \end{itemize}
+  \end{block}
 \end{frame}
 
 \begin{frame}{Trabajos futuros}\usebeamercolor[fg]{normal text}
-  Mejorar la detección de colisiones (segunda fase más costosa).
-  \begin{itemize}
-    \item \textit{Box Pruning}
+  \begin{block}{Mejorar la detección de colisiones (segunda fase más costosa)}
     \begin{itemize}
+    \item \textit{Box Pruning}
+      \begin{itemize}
       \item Vectorizar comprobación solapamiento geometrías.
       \item Paralelizar con Multi-SAP (híbrido cuadricula espacial y SAPs).
-    \end{itemize}
+      \end{itemize}
     \item Mejor implementación de DBVH.
     \item Usar un índice espacial estático para los cuerpos inmóviles.
-  \end{itemize}
+    \end{itemize}
+  \end{block}
 \end{frame}
 
 \appendix
 
-\begin{frame}[allowframebreaks]{Referencias}
+\begin{frame}{Referencias}
 
   \nocite{*}
   \bibliography{slides}
