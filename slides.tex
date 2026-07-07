@@ -338,13 +338,15 @@
 \end{frame}
 
 \begin{frame}{Colisión}\usebeamercolor[fg]{normal text}
-  Objetivos
+  \begin{block}{Objetivos}
   \begin{itemize}
     \item Encontrar los pares de cuerpos solapantes.
     \item Crear los árbitros de colisión de nuevos pares.
     \item Actualizar los árbitros existentes.
-  \end{itemize}
-  Fases
+    \end{itemize}
+  \end{block}
+  \begin{block}{Fases}
+    \vspace*{.15cm}
   \begin{columns}[t]
     \column{0.4\textwidth}{
       \textit{Broad-phase}
@@ -359,10 +361,11 @@
       \end{figure}
     }
   \end{columns}
+  \end{block}
 \end{frame}
 
 \begin{frame}{Aplicar fuerzas}\usebeamercolor[fg]{normal text}
-  Objetivos
+  \begin{block}{Objetivos}
   \begin{itemize}
     \item Actualizar las velocidades de los cuerpos.
     \item En base a:
@@ -372,7 +375,8 @@
       \item Velocidad anterior.
     \end{itemize}
   \end{itemize}
-  Cálculo (método de Euler y 2ª ley de Newton)
+  \end{block}
+  \begin{block}{Cálculo (método de Euler y 2ª ley de Newton)}
   \begin{columns}[t]
     \column{0.6\textwidth}{
       \begin{align*} 
@@ -388,12 +392,13 @@
       \end{itemize}
     }
   \end{columns}
+  \end{block}
 \end{frame}
 
 \begin{frame}{Resolver restricciones: Colisiones}\usebeamercolor[fg]{normal text}
   \begin{columns}
     \column{0.75\textwidth}{
-    Objetivos
+    \begin{block}{Objetivos}
     \begin{itemize}
       \item Por cada árbitro de colisión:
       \begin{itemize}
@@ -401,7 +406,8 @@
         \item Aplicar su fuerza normal y tangencial.
       \end{itemize}
     \end{itemize}
-    Calculo (3ª ley de Newton)
+    \end{block}
+    \begin{block}{Calculo (3ª ley de Newton)}
     \begin{itemize}
       \item Velocidad relativa al punto de contacto:
       \begin{align*}
@@ -416,7 +422,7 @@
         v_n >= 0
       \end{align*}
     \end{itemize}
-
+    \end{block}
   }
   \column{0.25\textwidth}{
     \begin{figure}
@@ -432,7 +438,7 @@
 \begin{frame}{Resolver restricciones: Articulaciones}\usebeamercolor[fg]{normal text}
   \begin{columns}
     \column{0.75\textwidth}{
-    Objetivos
+    \begin{block}{Objetivos}
     \begin{itemize}
       \item Por cada árbitro de colisión:
       \begin{itemize}
@@ -440,7 +446,8 @@
         \item Aplicar su fuerza normal y tangencial.
       \end{itemize}
     \end{itemize}
-    Calculo (3ª ley de Newton)
+    \end{block}
+    \begin{block}{Calculo (3ª ley de Newton)}
     \begin{itemize}
       \item Velocidad relativa al punto de rotación:
       \begin{align*}
@@ -451,7 +458,7 @@
         \Delta v = 0
       \end{align*}
     \end{itemize}
-
+    \end{block}
   }
   \column{0.25\textwidth}{
     \begin{figure}
@@ -465,7 +472,7 @@
 \end{frame}
 
 \begin{frame}{Actualizar posiciones}\usebeamercolor[fg]{normal text}
-  Objetivos
+  \begin{block}{Objetivos}
   \begin{itemize}
     \item Actualizar las posiciones de los cuerpos.
     \item En base a:
@@ -475,7 +482,8 @@
       \item Posición anterior.
     \end{itemize}
   \end{itemize}
-  Cálculo (método de Euler)
+  \end{block}
+  \begin{block}{Cálculo (método de Euler)}
   \begin{columns}[t]
     \column{0.6\textwidth}{
       \begin{align*} 
@@ -491,23 +499,26 @@
       \end{itemize}
     }
   \end{columns}
+  \end{block}
 \end{frame}
 
 \subsection{Índices espaciales}
 
 \begin{frame}{¿Qué es un índice espacial?}\usebeamercolor[fg]{normal text}
-  Definición
+  \begin{block}{Definición}
   \begin{itemize}
     \item Estructura de aceleración para consultas espaciales.
     \item Filtrar las geometrías en un espacio \emph{2D} o 3D por área.
   \end{itemize}
-  Aplicaciones
+  \end{block}
+  \begin{block}{Aplicaciones}
   \begin{itemize}
     \item Sistemas de Información Geográfica.
     \item Computación gráfica (\textit{Ray Trancing}).
     \item \emph{Motores de físicas} y gráficos.
   \end{itemize}
-  Tipos
+  \end{block}
+  \begin{block}{Tipos}
   \begin{itemize}
     \item Estáticos (geometrías quietas):
     \begin{itemize}
@@ -518,6 +529,7 @@
       \item \textit{\textbf{Dynamic Bounding Volume Hierarchy}}, \textit{\textbf{Sweep and Prune}}, \ldots
     \end{itemize}
   \end{itemize}
+  \end{block}
 \end{frame}
 
 \begin{frame}{\textit{Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
@@ -589,7 +601,7 @@
     Especializado para la \textit{broad-phase}.
   \end{quote}
 
-  Algoritmo
+  \begin{block}{Algoritmo}
   \begin{itemize}
     \item Guardar la coordenada mínima y máxima de cada cuerpo en cada eje.
     \item Ordenar la lista de coordenadas de cada eje.
@@ -599,12 +611,13 @@
       \item Solapamiento si pasa en todos los ejes.
     \end{itemize}
   \end{itemize}
+  \end{block}
 \end{frame}
 
 \section{Objetivos y motivaciones}
 
 \begin{frame}{Mejorar el rendimiento de Box2D-lite}\usebeamercolor[fg]{normal text}
-  ¿Porqué?
+  ¿Por qué?
   \begin{itemize}
     \item Buena documentación.
     \item Código fuente limpio y comprensible.
@@ -637,7 +650,7 @@
 \end{frame}
 
 \begin{frame}{Optimizarlo para sistemas embebidos}\usebeamercolor[fg]{normal text}
-  ¿Porqué?
+  ¿Por qué?
   \begin{itemize}
     \item Mejoras de rendimiento más notorias.
     \item Mayor control del hardware.
@@ -656,21 +669,20 @@
 \section{Metodología y planificación}
 
 \begin{frame}{Metodología}\usebeamercolor[fg]{normal text}
-  ¿Cuál se escogió?
-  \begin{itemize}
-    \item Metodología ágil: Incremental e iterativa.
-  \end{itemize}
-  ¿Porqué se escogió?
-  \begin{itemize}
+
+  \begin{block}{Metodología ágil: Incremental e iterativa}
+    \begin{itemize}
     \item Proyecto de dimensiones desconocidas.
     \item Desarrollo fácilmente separable por iteraciones.
     \item Tener en todo momento una versión funcional.
-  \end{itemize}
-  ¿Cómo se aplicó?
+    \end{itemize}
+  \end{block}
+
+  \begin{exampleblock}{Fases principales}
   \begin{columns}
     \column{0.6\textwidth}{
       \begin{itemize}
-        \item Analizar y desarrollar las tareas iniciales.
+        \item Analisis inicial.
         \item Por cada iteración:
           \begin{enumerate}
             \item Analizar cuellos de botella.
@@ -686,6 +698,7 @@
       \end{figure}
     }
   \end{columns}
+  \end{exampleblock}
 \end{frame}
 
 \begin{frame}{Planificación inicial}\usebeamercolor[fg]{normal text}
