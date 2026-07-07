@@ -617,18 +617,21 @@
 \section{Objetivos y motivaciones}
 
 \begin{frame}{Mejorar el rendimiento de Box2D-lite}\usebeamercolor[fg]{normal text}
-  ¿Por qué?
+
+  \begin{block}{¿Por qué?}
   \begin{itemize}
     \item Buena documentación.
     \item Código fuente limpio y comprensible.
     \item Alto coste computacional.
     \item Carente de muchas optimizaciones.
     \item No aprovecha las arquitecturas multi-núcleo.
-  \end{itemize}
+    \end{itemize}
+  \end{block}
 \end{frame}
 
 \begin{frame}{Mejorar el rendimiento de Box2D-lite}\usebeamercolor[fg]{normal text}
-  Resultados
+
+  \begin{block}{Objetivos}
   \begin{itemize}
     \item Demostrar y refinar conocimientos.
     \begin{itemize}
@@ -647,16 +650,20 @@
       \item Componentes cada vez más caros.
     \end{itemize}
   \end{itemize}
+  \end{block}
 \end{frame}
 
 \begin{frame}{Optimizarlo para sistemas embebidos}\usebeamercolor[fg]{normal text}
-  ¿Por qué?
+
+  \begin{block}{¿Por qué?}
   \begin{itemize}
     \item Mejoras de rendimiento más notorias.
     \item Mayor control del hardware.
     \item Arquitectura más simple y fácil de entender.
-  \end{itemize}
-  Resultados
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Objetivos}
   \begin{itemize}
     \item Ejecutar el motor en arquitecturas ARM.
     \begin{itemize}
@@ -664,6 +671,7 @@
       \item Videojuegos móviles.
     \end{itemize}
   \end{itemize}
+  \end{block}
 \end{frame}
 
 \section{Metodología y planificación}
@@ -679,6 +687,7 @@
   \end{block}
 
   \begin{exampleblock}{Fases principales}
+  \vspace*{-.25cm}
   \begin{columns}
     \column{0.6\textwidth}{
       \begin{itemize}
@@ -701,7 +710,8 @@
   \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Planificación inicial}\usebeamercolor[fg]{normal text}
+\begin{frame}{Planificación inicial}
+  \begin{block}{Tareas previstas}
   \begin{itemize}
     \item Estudiar Box2D-lite.
     \begin{itemize}
@@ -710,7 +720,7 @@
     \item Analizar cuellos de botella.
     \begin{itemize}
       \item Principales \textit{hotspots} que mejorar.
-    \end{itemize}    
+    \end{itemize}
     \item Investigar posibles soluciones.
     \begin{itemize}
       \item Técnicas de optimización y paralelización.
@@ -724,9 +734,10 @@
       \item Compilación, plataformas, \textit{profiling} y \textit{benchmarking}.
     \end{itemize}
   \end{itemize}
+  \end{block}
 \end{frame}
 
-\begin{frame}{Planificación final}\usebeamercolor[fg]{normal text}
+\begin{frame}{Ejecución del proyecto y desviaciones}
   \begin{figure}
     \includegraphics[width=\textwidth]{planificacion}
   \end{figure}
@@ -769,7 +780,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{Plataformas}\usebeamercolor[fg]{normal text}
+\begin{frame}{Plataformas}
   \begin{table}[]
   \begin{tabular}{lllll}
   \textbf{}                                                                             & \textbf{RPI1}\footnote{Raspberry Pi 1B.}    & \textbf{RPI4}\footnote{Raspberry Pi 4B.}    & \textbf{PC}\footnote{Equipo de desarrollo,}                                                            & \textbf{FT3}\footnote{Nodo de la partición ``viz'' del supercomputador Finisterrae III.}                                                                   \\ \cline{2-5} 
@@ -783,8 +794,8 @@
   \end{table}
 \end{frame}
 
-\begin{frame}{Profiling}\usebeamercolor[fg]{normal text}
-  \textit{Perf}
+\begin{frame}{Profiling}
+  \begin{block}{Perf}
   \begin{columns}
     \column{0.5\textwidth}{
       \begin{itemize}
@@ -805,12 +816,15 @@
       \end{table}
     }
   \end{columns}
-  \textit{Intel Advisor}
+  \end{block}
+
+  \begin{block}{Intel Advisor}
+  \vspace{-.5cm}
   \begin{columns}
     \column{0.5\textwidth}{
       \begin{itemize}
-        \item Encontrar cuellos de botella por rendimiento CPU.
-        \item Mostrar consumo CPU por función e instrucción.
+        \item Encontrar cuellos de botella relativos a memoria caché y
+          memoria principal.
       \end{itemize}
     }
     \column{0.5\textwidth}{
@@ -819,9 +833,10 @@
       \end{figure}
     }
   \end{columns}
+  \end{block}
 \end{frame}
 
-\begin{frame}{Profiling}\usebeamercolor[fg]{normal text}
+\begin{frame}{Benchmarking}
   \begin{columns}
     \column{0.6\textwidth}{
       Lanzamiento de pruebas de rendimiento y escalabilidad
@@ -844,13 +859,13 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{Programa para probar del motor}\usebeamercolor[fg]{normal text}
+\begin{frame}{Programa para probar del motor}
   \begin{enumerate}
     \item Partir de la demo ya provista por Box2D-lite.
     \item Adaptarla a dispositivos \textit{Raspberry Pi}.
     \item Añadir escenas para estresar el motor.
     \begin{itemize}
-      \item Rúbik (cuerpos cayendo).
+      \item Rubik (cuerpos cayendo).
       \item Antigravedad (cuerpos flotando).
       \item Cadenas (cuerpos conectados).
     \end{itemize}
@@ -859,7 +874,7 @@
       \item Carga de trabajo.
       \item Duración de simulación.
     \end{itemize}
-    \item Parametrizar el programa.
+    \item Instrumentar el programa.
     \begin{itemize}
       \item Medir duración media de los ciclos de simulación.
     \end{itemize}
@@ -931,12 +946,13 @@
 \begin{frame}[fragile]{Segunda iteración: Paralelización del motor}
   \begin{columns}
     \column{0.7\textwidth}{
-      Paralelización de bucles con OpenMP:
-      \begin{itemize}
+      \begin{block}{Paralelización de bucles con OpenMP:}
+        \begin{itemize}
         \item Fácil de implementar en bucles sencillos.
         \item Sin muchos cambios en el código.
         \item Multi-plataforma.
-      \end{itemize}
+        \end{itemize}
+      \end{block}
     }
     \column{0.3\textwidth}{
       \begin{figure}
@@ -944,15 +960,16 @@
       \end{figure}
     }
   \end{columns}
-  Ejemplo
-  \begin{lstlisting}[basicstyle=\scriptsize,style=c,gobble=2]
-    #pragma omp for schedule(static) 
+  \begin{block}{Ejemplo}
+  \begin{lstlisting}[basicstyle=\scriptsize,language=C,gobble=2]
+    #pragma omp for schedule(static)
     for (int i = 0; i < (int)bodies.size(); ++i) {
       Body* b = bodies[i];
       b->velocity += dt * (gravity + b->invMass * b->force);
       b->angularVelocity += dt * b->invI * b->torque;
     }
   \end{lstlisting}
+  \end{block}
 \end{frame}
 
 \begin{frame}{Segunda iteración: Paralelización del motor}\usebeamercolor[fg]{normal text}
