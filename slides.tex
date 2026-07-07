@@ -9,19 +9,20 @@
 \begin{document}
 
 \maketitle
+\note{Hola, soy Nicolás Vázquez cancela y a continuación os voy a presentar mi Proyecto de Fin de Máster donde mejor el rendimiento de un motor de físicas 2D permitiendo incluso ejecutarlo en sistemas embebidos.}
 
 \section{Contexto}
+\note{Antes de empezar con el proyecto es necesario entender que son los motores de físicas y los sistemas embebidos.}
 
-\begin{frame}{¿Qué es un motor de físicas?}
+\begin{frame}{¿Qué es un motor de físicas?}\usebeamercolor[fg]{normal text}
   Definición
-
   \begin{columns}
-    \column{0.75\textwidth}{
+    \column{0.75\textwidth}
       \begin{itemize}
         \item Ciencia:
           \begin{itemize}
             \item Aproximación iterativa de principios físicos.
-            \item Resolver colisiones de cuerpos, rígidos, blandos, y fluidos.
+            \item Resolver colisiones de cuerpos rígidos, blandos, y fluidos.
           \end{itemize}
         \item Ingeniería:
           \begin{itemize}
@@ -34,18 +35,20 @@
             \item Objetos con propiedades físicas.
           \end{itemize}
       \end{itemize}
-    }
-    \column{0.25\textwidth}{
+    
+    \column{0.25\textwidth}
       \begin{figure}
         \includegraphics[width=\textwidth]{fisicas}
       \end{figure}
-    }
   \end{columns}
+  \note{
+    ¿Qué es un motor de físicas?
+    Es una aproximación iterativa para resolver las colisiones entre cuerpos rígidos, blandos y fluidos, mediante la aplicación de múltiples principios físicos.
+  }
 \end{frame}
 
-\begin{frame}{¿Qué es un motor de físicas?}
+\begin{frame}{¿Qué es un motor de físicas?}\usebeamercolor[fg]{normal text}
   Origen
-
   \begin{columns}
     \column{0.7\textwidth}{
       \begin{itemize}
@@ -83,7 +86,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{¿Qué es un motor de físicas?}
+\begin{frame}{¿Qué es un motor de físicas?}\usebeamercolor[fg]{normal text}
   Aplicaciones
 
   \begin{columns}
@@ -108,7 +111,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{¿Qué son los sistemas embebidos?}
+\begin{frame}{¿Qué son los sistemas embebidos?}\usebeamercolor[fg]{normal text}
   \begin{columns}
     \column{0.7\textwidth}{
         Definición
@@ -140,7 +143,7 @@
 
 \subsection{Box2D-lite}
 
-\begin{frame}{¿Qué es Box2D-lite?}
+\begin{frame}{¿Qué es Box2D-lite?}\usebeamercolor[fg]{normal text}
   \begin{columns}
     \column{0.6\textwidth}{
         Definición
@@ -168,7 +171,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{¿Qué elementos tiene Box2D-lite?}
+\begin{frame}{¿Qué elementos tiene Box2D-lite?}\usebeamercolor[fg]{normal text}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{mundo}
   \end{figure}
@@ -195,7 +198,7 @@
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Cuerpo rígido}
+\begin{frame}{Cuerpo rígido}\usebeamercolor[fg]{normal text}
   \begin{columns}
     \column{0.3\textwidth}{
       \begin{figure}
@@ -250,7 +253,7 @@
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Árbitro de colisión}
+\begin{frame}{Árbitro de colisión}\usebeamercolor[fg]{normal text}
   \begin{columns}
     \column{0.5\textwidth}{
       \begin{itemize}
@@ -283,7 +286,7 @@
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Árbitro de articulación}
+\begin{frame}{Árbitro de articulación}\usebeamercolor[fg]{normal text}
   \begin{columns}
     \column{0.5\textwidth}{
       \begin{itemize}
@@ -316,13 +319,13 @@
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}{¿Cómo funciona Box2D-lite?}
+\begin{frame}{¿Cómo funciona Box2D-lite?}\usebeamercolor[fg]{normal text}
   \begin{figure}
     \includegraphics[width=\textwidth]{FlujoMotorFisicas}
   \end{figure}
 \end{frame}
 
-\begin{frame}{Colisión}
+\begin{frame}{Colisión}\usebeamercolor[fg]{normal text}
   Objetivos
   \begin{itemize}
     \item Encontrar los pares de cuerpos solapantes.
@@ -346,7 +349,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{Aplicar fuerzas}
+\begin{frame}{Aplicar fuerzas}\usebeamercolor[fg]{normal text}
   Objetivos
   \begin{itemize}
     \item Actualizar las velocidades de los cuerpos.
@@ -375,7 +378,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{Resolver restricciones: Colisiones}
+\begin{frame}{Resolver restricciones: Colisiones}\usebeamercolor[fg]{normal text}
   \begin{columns}
     \column{0.75\textwidth}{
     Objetivos
@@ -414,7 +417,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{Resolver restricciones: Articulaciones}
+\begin{frame}{Resolver restricciones: Articulaciones}\usebeamercolor[fg]{normal text}
   \begin{columns}
     \column{0.75\textwidth}{
     Objetivos
@@ -449,7 +452,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{Actualizar posiciones}
+\begin{frame}{Actualizar posiciones}\usebeamercolor[fg]{normal text}
   Objetivos
   \begin{itemize}
     \item Actualizar las posiciones de los cuerpos.
@@ -480,7 +483,7 @@
 
 \subsection{Índices espaciales}
 
-\begin{frame}{¿Qué es un índice espacial?}
+\begin{frame}{¿Qué es un índice espacial?}\usebeamercolor[fg]{normal text}
   Definición
   \begin{itemize}
     \item Estructura de aceleración para consultas espaciales.
@@ -505,43 +508,43 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\textit{Bounding Volume Hierarchy}}
+\begin{frame}{\textit{Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{BVH-build-1}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Bounding Volume Hierarchy}}
+\begin{frame}{\textit{Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{BVH-build-2}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Bounding Volume Hierarchy}}
+\begin{frame}{\textit{Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{BVH-build-3}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Bounding Volume Hierarchy}}
+\begin{frame}{\textit{Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{BVH-build-4}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Bounding Volume Hierarchy}}
+\begin{frame}{\textit{Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{BVH-build-5}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Bounding Volume Hierarchy}}
+\begin{frame}{\textit{Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{BVH-build-6}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Dynamic Bounding Volume Hierarchy}}
+\begin{frame}{\textit{Dynamic Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
   Dinamizar \textit{Bounding Volume Hierarchy} estático
   \begin{itemize}
     \item Reinsertar los cuerpos que se han movido.
@@ -553,7 +556,7 @@
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Sweep and Prune}}
+\begin{frame}{\textit{Sweep and Prune}\usebeamercolor[fg]{normal text}}
   \begin{columns}
     \column{0.5\textwidth}{
       \begin{figure}
@@ -568,7 +571,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{\textit{Sweep and Prune}}
+\begin{frame}{\textit{Sweep and Prune}\usebeamercolor[fg]{normal text}}
   \begin{quote}
     Especializado para la \textit{broad-phase}.
   \end{quote}
@@ -587,7 +590,7 @@
 
 \section{Objetivos y motivaciones}
 
-\begin{frame}{Mejorar el rendimiento de Box2D-lite}
+\begin{frame}{Mejorar el rendimiento de Box2D-lite}\usebeamercolor[fg]{normal text}
   ¿Porqué?
   \begin{itemize}
     \item Buena documentación.
@@ -598,7 +601,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Mejorar el rendimiento de Box2D-lite}
+\begin{frame}{Mejorar el rendimiento de Box2D-lite}\usebeamercolor[fg]{normal text}
   Resultados
   \begin{itemize}
     \item Demostrar y refinar conocimientos.
@@ -620,7 +623,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Optimizarlo para sistemas embebidos}
+\begin{frame}{Optimizarlo para sistemas embebidos}\usebeamercolor[fg]{normal text}
   ¿Porqué?
   \begin{itemize}
     \item Mejoras de rendimiento más notorias.
@@ -639,7 +642,7 @@
 
 \section{Metodología y planificación}
 
-\begin{frame}{Metodología}
+\begin{frame}{Metodología}\usebeamercolor[fg]{normal text}
   ¿Cuál se escogió?
   \begin{itemize}
     \item Metodología ágil: Incremental e iterativa.
@@ -672,7 +675,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{Planificación inicial}
+\begin{frame}{Planificación inicial}\usebeamercolor[fg]{normal text}
   \begin{itemize}
     \item Estudiar Box2D-lite.
     \begin{itemize}
@@ -697,7 +700,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Planificación final}
+\begin{frame}{Planificación final}\usebeamercolor[fg]{normal text}
   \begin{figure}
     \includegraphics[width=\textwidth]{planificacion}
   \end{figure}
@@ -707,7 +710,7 @@
 
 \subsection{Preparación de herramientas}
 
-\begin{frame}{Compilación}
+\begin{frame}{Compilación}\usebeamercolor[fg]{normal text}
   \textit{GCC}
   \begin{columns}
     \column{0.5\textwidth}{
@@ -740,7 +743,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{Plataformas}
+\begin{frame}{Plataformas}\usebeamercolor[fg]{normal text}
   \begin{table}[]
   \begin{tabular}{lllll}
   \textbf{}                                                                             & \textbf{RPI1}\footnote{Raspberry Pi 1B.}    & \textbf{RPI4}\footnote{Raspberry Pi 4B.}    & \textbf{PC}\footnote{Equipo de desarrollo,}                                                            & \textbf{FT3}\footnote{Nodo de la partición ``viz'' del supercomputador Finisterrae III.}                                                                   \\ \cline{2-5} 
@@ -754,7 +757,7 @@
   \end{table}
 \end{frame}
 
-\begin{frame}{Profiling}
+\begin{frame}{Profiling}\usebeamercolor[fg]{normal text}
   \textit{Perf}
   \begin{columns}
     \column{0.5\textwidth}{
@@ -792,7 +795,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{Profiling}
+\begin{frame}{Profiling}\usebeamercolor[fg]{normal text}
   \begin{columns}
     \column{0.6\textwidth}{
       Lanzamiento de pruebas de rendimiento y escalabilidad
@@ -815,7 +818,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{Programa para probar del motor}
+\begin{frame}{Programa para probar del motor}\usebeamercolor[fg]{normal text}
   \begin{enumerate}
     \item Partir de la demo ya provista por Box2D-lite.
     \item Adaptarla a dispositivos \textit{Raspberry Pi}.
@@ -839,7 +842,7 @@
 
 \subsection{Iteraciones}
 
-\begin{frame}{Primera iteración: Optimización en la broadphase}
+\begin{frame}{Primera iteración: Optimización en la broadphase}\usebeamercolor[fg]{normal text}
   \begin{table}[]
   \begin{tabular}{lll}
   \textbf{\textit{Children}} & \textbf{\textit{Self}} & \textbf{\textit{Symbol}} \\ \cline{1-3}
@@ -854,7 +857,7 @@
   \end{table}
 \end{frame}
 
-\begin{frame}{Primera iteración: Optimización en la broadphase}
+\begin{frame}{Primera iteración: Optimización en la broadphase}\usebeamercolor[fg]{normal text}
   1º problema: Usar un único diccionario de árbitros por mundo.
   \begin{itemize}
     \item Por cada comprobación de colisión, hay que consultar y modificar el diccionario para actualizarlo.
@@ -867,7 +870,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Primera iteración: Optimización en la broadphase}
+\begin{frame}{Primera iteración: Optimización en la broadphase}\usebeamercolor[fg]{normal text}
   2º problema: Comprobación de colisión de todos los pares de cuerpos.
   \begin{itemize}
     \item Cada comprobación es cara.
@@ -881,7 +884,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Segunda iteración: Paralelización del motor}
+\begin{frame}{Segunda iteración: Paralelización del motor}\usebeamercolor[fg]{normal text}
   \begin{table}[]
   \begin{tabular}{lll}
   \textbf{\textit{Children}} & \textbf{\textit{Self}} & \textbf{\textit{Symbol}} \\ \cline{1-3}
@@ -926,7 +929,7 @@
   \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Segunda iteración: Paralelización del motor}
+\begin{frame}{Segunda iteración: Paralelización del motor}\usebeamercolor[fg]{normal text}
   Paralelización de fases más costosas:
   \begin{itemize}
     \item Bucle de detección de colisiones
@@ -941,7 +944,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Segunda iteración: Paralelización del motor}
+\begin{frame}{Segunda iteración: Paralelización del motor}\usebeamercolor[fg]{normal text}
   Paralelización del resto de fases:
     \begin{itemize}
     \item Bucle de aplicación de fuerza y bucle de actualización de posiciones
@@ -953,7 +956,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Tercera iteración: Mejora del índice espacial}
+\begin{frame}{Tercera iteración: Mejora del índice espacial}\usebeamercolor[fg]{normal text}
 \begin{table}[]
 \begin{tabular}{lll}
 \textbf{\textit{Children}} & \textbf{\textit{Self}} & \textbf{\textit{Symbol}} \\ \cline{1-3} 
@@ -972,7 +975,7 @@
 \end{table}
 \end{frame}
 
-\begin{frame}{Tercera iteración: Mejora del índice espacial}
+\begin{frame}{Tercera iteración: Mejora del índice espacial}\usebeamercolor[fg]{normal text}
   Problema: Las funciones del DBVH son las más costosas ahora
   \begin{itemize}
     \item Mejor rendimiento pero sin posibilidad de seguir mejorando.
@@ -987,31 +990,31 @@
 
 \section{Resultados}
 
-\begin{frame}{\textit{Speedup} en la \textit{Raspberry Pi 4B}}
+\begin{frame}{\textit{Speedup}\usebeamercolor[fg]{normal text} en la \textit{Raspberry Pi 4B}}
   \begin{figure}
     \includegraphics[width=\textwidth]{SpeedupRPI4}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Speedup} en el \textit{Finisterrae III}}
+\begin{frame}{\textit{Speedup}\usebeamercolor[fg]{normal text} en el \textit{Finisterrae III}}
   \begin{figure}
     \includegraphics[width=\textwidth]{SpeedupFT3}
   \end{figure}
 \end{frame}
 
-\begin{frame}{Escalabilidad en la \textit{Raspberry Pi 4B}}
+\begin{frame}{Escalabilidad en la \textit{Raspberry Pi 4B}\usebeamercolor[fg]{normal text}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{Results10RPI4}
   \end{figure}
 \end{frame}
 
-\begin{frame}{Escalabilidad en el \textit{Finisterrae III}}
+\begin{frame}{Escalabilidad en el \textit{Finisterrae III}\usebeamercolor[fg]{normal text}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{Results10FT3}
   \end{figure}
 \end{frame}
 
-\begin{frame}{Demostración de resultados}
+\begin{frame}{Demostración de resultados}\usebeamercolor[fg]{normal text}
   Ejecutar el programa de prueba con:
   \begin{itemize}
     \item Escenas originales.
@@ -1025,7 +1028,7 @@
 
 \section{Conclusiones y trabajos futuros}
 
-\begin{frame}{Conclusiones}
+\begin{frame}{Conclusiones}\usebeamercolor[fg]{normal text}
   \begin{itemize}
     \item Gran complejidad de los motores de físicas
     \begin{itemize}
@@ -1046,7 +1049,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Trabajos futuros}
+\begin{frame}{Trabajos futuros}\usebeamercolor[fg]{normal text}
   Mejorar resolución de restricciones (nueva fase más costosa).
   \begin{itemize}
     \item Vectorizar los cálculos:
@@ -1064,7 +1067,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Trabajos futuros}
+\begin{frame}{Trabajos futuros}\usebeamercolor[fg]{normal text}
   Mejorar la detección de colisiones (segunda fase más costosa).
   \begin{itemize}
     \item \textit{Box Pruning}
