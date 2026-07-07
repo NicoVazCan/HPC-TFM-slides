@@ -162,6 +162,7 @@
           \item Simula cuerpos rígidos y articulaciones.
           \item Implementación limpia y simple.
           \item Programado en \textit{C++}.
+          \item Aproximación de físicas por impulso.
         \end{itemize}
         \end{block}
         \begin{block}{Origen}
@@ -198,8 +199,7 @@
       std::map<ArbiterKey, Arbiter>
         arbiters;                   // Arbitros de colision
 
-      Vec2 gravity;
-      int iterations;
+      // ...
     };
 
     struct ArbiterKey
@@ -290,10 +290,10 @@
       Body* body1;          // Conectividad
       Body* body2;          //
 
-      float friction;       // Fricción combinada
-
       Contact contacts[2];  // Datos run-time
       int numContacts;      //
+
+      // ...
     };
   \end{lstlisting}
 \end{frame}
@@ -326,7 +326,7 @@
       Vec2 localAnchor1, localAnchor2;    // Separación a la
                                           // articulación
 
-      // ... datos run-time
+      // ...
     };
   \end{lstlisting}
 \end{frame}
