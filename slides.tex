@@ -170,7 +170,7 @@
 \subsection{Box2D-lite}
 \note{Empezando por explicar que es box2d-lite.}
 
-\begin{frame}{¿Qué es Box2D-lite?}\usebeamercolor[fg]{normal text}
+\begin{frame}{¿Qué es Box2D-lite?}
   \begin{columns}
     \column{0.6\textwidth}{
       \begin{block}{Definición}
@@ -202,7 +202,7 @@
   \note{Box2d-lite es el motor de físicas 2D que se mejoró su rendimiento, su código C++ es muy sencillo y utiliza la aproximación por impulsos para resolver la colisión entre cuerpos rígidos. Fue desarrollado por Erin Catto para la GDC de 2006 para demostrar sus investigaciones en los motores de físicas.}
 \end{frame}
 
-\begin{frame}{¿Qué elementos tiene Box2D-lite?}\usebeamercolor[fg]{normal text}
+\begin{frame}{¿Qué elementos tiene Box2D-lite?}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{mundo}
   \end{figure}
@@ -230,7 +230,7 @@
   \note{El mundo en el motor se representaría de la siguiente forma: una lista de cuerpos, una lista de árbitros de articulaciones, y un diccionario de hábitos de colisiones.}
 \end{frame}
 
-\begin{frame}{Cuerpo rígido}\usebeamercolor[fg]{normal text}
+\begin{frame}{Cuerpo rígido}
   \begin{columns}
     \column{0.3\textwidth}{
       \begin{figure}
@@ -287,7 +287,7 @@
   \note{Y estas propiedades quedan contenidas en la siguiente clase, donde se puede ver el estado, configuración de la caja y fuerzas externas.}
 \end{frame}
 
-\begin{frame}{Árbitro de colisión}\usebeamercolor[fg]{normal text}
+\begin{frame}{Árbitro de colisión}
   \begin{columns}
     \column{0.5\textwidth}{
       \begin{itemize}
@@ -322,7 +322,7 @@
   \note{Así se representaría el árbitro de colisiones, con la referencias de los cuerpos que vigila y sus puntos de contacto.}
 \end{frame}
 
-\begin{frame}{Árbitro de articulación}\usebeamercolor[fg]{normal text}
+\begin{frame}{Árbitro de articulación}
   \begin{columns}
     \column{0.5\textwidth}{
       \begin{itemize}
@@ -357,14 +357,14 @@
   \note{De nuevo para representarlos y necesitamos las referencias de los cuerpos afectados y la separación de la articulación respecto a los cuerpos.}
 \end{frame}
 
-\begin{frame}{¿Cómo funciona Box2D-lite?}\usebeamercolor[fg]{normal text}
+\begin{frame}{¿Cómo funciona Box2D-lite?}
   \begin{figure}
     \includegraphics[width=\textwidth]{FlujoMotorFisicas}
   \end{figure}
   \note{Ahora nos centraremos en cómo funciona el motor. Para simular las físicas, box2d-lite implementa cuatro fases: la colisión, la aplicación de fuerzas, resolución de restricciones, y actualización de posiciones. Al terminar se vuelve a comenzar el ciclo de simulación, aplicando el desfase de tiempo a simular.}
 \end{frame}
 
-\begin{frame}{Colisión}\usebeamercolor[fg]{normal text}
+\begin{frame}{Colisión}
   \begin{block}{Objetivos}
   \begin{itemize}
     \item Encontrar los pares de cuerpos solapantes.
@@ -393,7 +393,7 @@
   Esta fase a su vez se divide en dos sub-fases: la broadphase, para reconocer a gran escala los cuerpos solapantes, y luego narrowphase para encontrar los puntos de contacto entre ellos.}
 \end{frame}
 
-\begin{frame}{Aplicar fuerzas}\usebeamercolor[fg]{normal text}
+\begin{frame}{Aplicar fuerzas}
   \begin{block}{Objetivos}
   \begin{itemize}
     \item Actualizar las velocidades de los cuerpos.
@@ -425,7 +425,7 @@
   \note{En la fase de aplicación de fuerzas, se actualizará la velocidad de los cuerpos en base a la velocidad actual, el desfase de tiempo, y la fuerza y torque aplicados.}
 \end{frame}
 
-\begin{frame}{Resolver restricciones: Colisiones}\usebeamercolor[fg]{normal text}
+\begin{frame}{Resolver restricciones: Colisiones}
   \begin{columns}
     \column{0.75\textwidth}{
     \begin{block}{Objetivos}
@@ -467,7 +467,7 @@
   Para ello la velocidad de los cuerpos relativa al punto de contacto debe ser mayor o igual a cero.}
 \end{frame}
 
-\begin{frame}{Resolver restricciones: Articulaciones}\usebeamercolor[fg]{normal text}
+\begin{frame}{Resolver restricciones: Articulaciones}
   \begin{columns}
     \column{0.75\textwidth}{
     \begin{block}{Objetivos}
@@ -504,7 +504,7 @@
   \note{Y para las articulaciones más de lo mismo, pero se tiene que mantener una velocidad en la articulación igual a cero para evitar que los cuerpos se separen.}
 \end{frame}
 
-\begin{frame}{Actualizar posiciones}\usebeamercolor[fg]{normal text}
+\begin{frame}{Actualizar posiciones}
   \begin{block}{Objetivos}
   \begin{itemize}
     \item Actualizar las posiciones de los cuerpos.
@@ -539,7 +539,7 @@
 \subsection{Estructuras de aceleración: Índices espaciales}
 \note{Ahora se explicarán brevemente el los índices espaciales utilizados para acelerar la fase de detección de colisiones.}
 
-\begin{frame}{¿Qué es un índice espacial?}\usebeamercolor[fg]{normal text}
+\begin{frame}{¿Qué es un índice espacial?}
   \begin{block}{Definición}
   \begin{itemize}
     \item Estructura de aceleración para consultas espaciales.
@@ -570,43 +570,43 @@
   Existen dos tipos: estáticos para la geométricas quietas, y dinámicos por geometrías en movimiento.}
 \end{frame}
 
-\begin{frame}{\textit{Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
+\begin{frame}{\textit{Bounding Volume Hierarchy}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{BVH-build-1}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
+\begin{frame}{\textit{Bounding Volume Hierarchy}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{BVH-build-2}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
+\begin{frame}{\textit{Bounding Volume Hierarchy}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{BVH-build-3}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
+\begin{frame}{\textit{Bounding Volume Hierarchy}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{BVH-build-4}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
+\begin{frame}{\textit{Bounding Volume Hierarchy}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{BVH-build-5}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
+\begin{frame}{\textit{Bounding Volume Hierarchy}}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{BVH-build-6}
   \end{figure}
 \end{frame}
 
-\begin{frame}{\textit{Dynamic Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
+\begin{frame}{\textit{Dynamic Bounding Volume Hierarchy}}
   \begin{block}{Dinamizar \textit{Bounding Volume Hierarchy} estático}
   \begin{itemize}
     \item Reinsertar los cuerpos que se han movido.
@@ -621,7 +621,7 @@
   Una optimización aplicables es ampliar el las cajas que envuelven a los cuerpos, de forma que si la caja mínima sale de esta caja ampliado se inserta, y si no, no.}
 \end{frame}
 
-\begin{frame}{\textit{Sweep and Prune}\usebeamercolor[fg]{normal text}}
+\begin{frame}{\textit{Sweep and Prune}}
   \begin{quote}
     Especializado para la \textit{broad-phase}.
   \end{quote}
@@ -641,7 +641,7 @@
   Este funciona guardando en dos listas ordenadas las coordenadas mínimas y máximas de cada cuerpo, y si hay la coordenada de un cuerpo está dentro de la mínima y máxima de otro en ambos ejes, hay un potencial solapamiento.}
 \end{frame}
 
-\begin{frame}{\textit{Sweep and Prune}\usebeamercolor[fg]{normal text}}
+\begin{frame}{\textit{Sweep and Prune}}
   \begin{columns}
     \column{0.5\textwidth}{
       \begin{figure}
@@ -660,7 +660,7 @@
 \section{Objetivos y motivaciones}
 \note{Ahora que ya tenemos claro los fundamentos, comenzamos con los objetivos y motivaciones del proyecto.}
 
-\begin{frame}{Mejorar el rendimiento de Box2D-lite}\usebeamercolor[fg]{normal text}
+\begin{frame}{Mejorar el rendimiento de Box2D-lite}
 
   \begin{block}{¿Por qué?}
   \begin{itemize}
@@ -674,7 +674,7 @@
   \note{Por qué mejorar el rendimiento de box 2D lite?, pues porque tiene una buena documentación, con un código limpio y fácil comprender, que la simulación de físicas tiene bastante coste computacional y que no tiene muchas optimizaciones aplicadas. Además no está paralelizado.}
 \end{frame}
 
-\begin{frame}{Mejorar el rendimiento de Box2D-lite}\usebeamercolor[fg]{normal text}
+\begin{frame}{Mejorar el rendimiento de Box2D-lite}
 
   \begin{block}{Objetivos}
   \begin{itemize}
@@ -700,7 +700,7 @@
   Permitir al motor simular mayor cantidad de cuerpos, ocupar menos tiempo de CPU por fotograma, y poder ejecutar el motor en plataformas más molestas.}
 \end{frame}
 
-\begin{frame}{Optimizarlo para sistemas embebidos}\usebeamercolor[fg]{normal text}
+\begin{frame}{Optimizarlo para sistemas embebidos}
 
   \begin{block}{¿Por qué?}
   \begin{itemize}
@@ -726,7 +726,7 @@
 \section{Metodología y planificación}
 \note{Para desarrollar este proyecto es antes necesario escoger una mitología y aplicar una planificación.}
 
-\begin{frame}{Metodología}\usebeamercolor[fg]{normal text}
+\begin{frame}{Metodología}
 
   \begin{block}{Metodología ágil: Incremental e iterativa}
     \begin{itemize}
@@ -832,7 +832,7 @@
   \end{block}
 \end{frame}
 
-\begin{frame}{Plataformas de prueba}\usebeamercolor[fg]{normal text}
+\begin{frame}{Plataformas de prueba}
   \begin{table}
     \begin{tabular}{lllll}
       \toprule
@@ -952,7 +952,7 @@
 
 \subsection{Iteraciones}
 
-\begin{frame}{Primera iteración: Optimización en la broadphase}\usebeamercolor[fg]{normal text}
+\begin{frame}{Primera iteración: Optimización en la broadphase}
   \begin{table}[]
   \begin{tabular}{lll}
   \textbf{\textit{Children}} & \textbf{\textit{Self}} & \textbf{\textit{Symbol}} \\ \cline{1-3}
@@ -967,7 +967,7 @@
   \end{table}
 \end{frame}
 
-\begin{frame}{Primera iteración: Optimización en la broadphase}\usebeamercolor[fg]{normal text}
+\begin{frame}{Primera iteración: Optimización en la broadphase}
 
   \begin{block}{1º problema: Usar un único diccionario de árbitros por mundo}
     \begin{itemize}
@@ -984,7 +984,7 @@
   \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Primera iteración: Optimización en la broadphase}\usebeamercolor[fg]{normal text}
+\begin{frame}{Primera iteración: Optimización en la broadphase}
 
   \begin{block}{2º problema: Comprobación de colisión de todos los
       pares de cuerpos}
@@ -1003,7 +1003,7 @@
   \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Segunda iteración: Paralelización del motor}\usebeamercolor[fg]{normal text}
+\begin{frame}{Segunda iteración: Paralelización del motor}
   \begin{table}[]
   \begin{tabular}{lll}
   \textbf{\textit{Children}} & \textbf{\textit{Self}} & \textbf{\textit{Symbol}} \\ \cline{1-3}
@@ -1079,7 +1079,7 @@
   \end{block}
 \end{frame}
 
-\begin{frame}{Tercera iteración: Mejora del índice espacial}\usebeamercolor[fg]{normal text}
+\begin{frame}{Tercera iteración: Mejora del índice espacial}
 \begin{table}[]
 \begin{tabular}{lll}
 \textbf{\textit{Children}} & \textbf{\textit{Self}} & \textbf{\textit{Symbol}} \\ \cline{1-3} 
@@ -1198,7 +1198,7 @@
   \end{block}
 \end{frame}
 
-\begin{frame}{Trabajos futuros}\usebeamercolor[fg]{normal text}
+\begin{frame}{Trabajos futuros}
   \begin{block}{Mejorar la detección de colisiones (segunda fase más costosa)}
     \begin{itemize}
     \item \textit{Box Pruning}
