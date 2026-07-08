@@ -9,7 +9,7 @@
 \begin{document}
 
 \maketitle
-\note{Hola, soy Nicolás Vázquez cancela y a continuación os voy a presentar mi Proyecto de Fin de Máster donde mejor el rendimiento de un motor de físicas 2D permitiendo incluso ejecutarlo en sistemas embebidos.}
+\note{Hola, soy Nicolás Vázquez cancela y a continuación os voy a presentar mi Proyecto de Fin de Máster en el que mejoré el rendimiento de un motor de físicas 2D permitiendo incluso ejecutarlo en sistemas embebidos.}
 
 \section{Contexto}
 \note{Antes de empezar con el proyecto es necesario entender que son los motores de físicas y los sistemas embebidos.}
@@ -44,7 +44,9 @@
   \end{block}
   \note{
     ¿Qué es un motor de físicas?
-    Es una aproximación iterativa para resolver las colisiones entre cuerpos rígidos, blandos y fluidos, mediante la aplicación de múltiples principios físicos.
+    En ciencia, una aproximación iterativa para resolver las colisiones entre cuerpos.
+    En ingeniería, una biblioteca para simular físicas.
+    En los juegos, una extensión del motor gráfico.
   }
 \end{frame}
 
@@ -87,6 +89,7 @@
       \end{figure}
     }
   \end{columns}
+  \note{Su origen se remonta a los primeros videojuegos como Pong y Asteroids, tras años aparecieron los motores Havok y Physx, y en la actualidad los motores incluso pueden simular fluidos.}
 \end{frame}
 
 \begin{frame}{¿Qué es un motor de físicas?}
@@ -117,6 +120,7 @@
       \vspace*{0cm}
     }
   \end{columns}
+  \note{Sus aplicaciones principales son los videojuegos robótica y conducción automática.}
 \end{frame}
 
 \begin{frame}{¿Qué son los sistemas embebidos?}
@@ -147,11 +151,14 @@
       \end{figure}
     }
   \end{columns}
+  \note{Y qué es un sistema embebido? Pues es un pequeño ordenador con un hardware muy limitado y normalmente se usan para videoconsolas, teléfonos móviles y robótica.}
 \end{frame}
 
 \section{Fundamentos}
+\note{Ahora se presentarán los fundamentos teóricos y técnicos empleados en el proyecto.}
 
 \subsection{Box2D-lite}
+\note{Empezando por explicar que es box2d-lite.}
 
 \begin{frame}{¿Qué es Box2D-lite?}\usebeamercolor[fg]{normal text}
   \begin{columns}
@@ -182,12 +189,14 @@
       \end{figure}
     }
   \end{columns}
+  \note{Box2d-lite es el motor de físicas 2D que se mejoró su rendimiento, su código C++ es muy sencillo y utiliza la aproximación por impulsos para resolver la colisión entre cuerpos rígidos. Fue desarrollado por Erin Catto para la GDC de 2006 para demostrar sus investigaciones en los motores de físicas.}
 \end{frame}
 
 \begin{frame}{¿Qué elementos tiene Box2D-lite?}\usebeamercolor[fg]{normal text}
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{mundo}
   \end{figure}
+  \note{Este motor tiene varios elementos comenzando por el mundo que representa a la escena a simular, el mundo a su vez contiene cuerpo rígidos y dos tipos de árbitros, unos que vigilan las colisiones, y otros las articulaciones.}
 \end{frame}
 
 \begin{frame}[fragile]{Mundo}
@@ -208,6 +217,7 @@
       Body* body2;
     };
   \end{lstlisting}
+  \note{El mundo en el motor se representaría de la siguiente forma: una lista de cuerpos, una lista de árbitros de articulaciones, y un diccionario de hábitos de colisiones.}
 \end{frame}
 
 \begin{frame}{Cuerpo rígido}\usebeamercolor[fg]{normal text}
@@ -243,6 +253,7 @@
       \end{figure}
     }
   \end{columns}
+  \note{Los cuerpos rígidos tendrán las propiedades de posición y rotación velocidad lineal y angular alto y ancho más momento de inercia y coeficiente de rozamiento.}
 \end{frame}
 
 \begin{frame}[fragile]{Cuerpo rígido}
@@ -263,6 +274,7 @@
       float torque;           //
     };
   \end{lstlisting}
+  \note{Y estas propiedades quedan contenidas en la siguiente clase, donde se puede ver el estado, configuración de la caja y fuerzas externas.}
 \end{frame}
 
 \begin{frame}{Árbitro de colisión}\usebeamercolor[fg]{normal text}
@@ -281,6 +293,7 @@
       \end{figure}
     }
   \end{columns}
+  \note{Un árbitro de colisiones se encarga de vigilar los cuerpos que se tocan para evitar que se solapen, y persistirá mientras se mantenga el contacto.}
 \end{frame}
 
 \begin{frame}[fragile]{Árbitro de colisión}
@@ -296,6 +309,7 @@
       // ...
     };
   \end{lstlisting}
+  \note{Así se representaría el árbitro de colisiones, con la referencias de los cuerpos que vigila y sus puntos de contacto.}
 \end{frame}
 
 \begin{frame}{Árbitro de articulación}\usebeamercolor[fg]{normal text}
@@ -314,6 +328,7 @@
       \end{figure}
     }
   \end{columns}
+  \note{El árbitro de articulación es muy similar al de colisión, pero en vez de prevenir de la penetración de los cuerpos este mantiene la unión de la articulación, permitiendo que roten libremente sobre ella.}
 \end{frame}
 
 \begin{frame}[fragile]{Árbitro de articulación}
@@ -329,12 +344,14 @@
       // ...
     };
   \end{lstlisting}
+  \note{De nuevo para representarlos y necesitamos las referencias de los cuerpos afectados y la separación de la articulación respecto a los cuerpos.}
 \end{frame}
 
 \begin{frame}{¿Cómo funciona Box2D-lite?}\usebeamercolor[fg]{normal text}
   \begin{figure}
     \includegraphics[width=\textwidth]{FlujoMotorFisicas}
   \end{figure}
+  \note{Ahora nos centraremos en cómo funciona el motor. Para simular las físicas, box2d-lite implementa cuatro fases: la colisión, la aplicación de fuerzas, resolución de restricciones, y actualización de posiciones. Al terminar se vuelve a comenzar el ciclo de simulación, aplicando el desfase de tiempo a simular.}
 \end{frame}
 
 \begin{frame}{Colisión}\usebeamercolor[fg]{normal text}
@@ -362,6 +379,8 @@
     }
   \end{columns}
   \end{block}
+  \note{La fase de colisión se centran en encontrar los pares de cuerpos que colisionen, para crear los árbitros de colisión que los vigilen, y si ya existen, actualizarlos.
+  Esta fase a su vez se divide en dos sub-fases: la broadphase, para reconocer a gran escala los cuerpos solapantes, y luego narrowphase para encontrar los puntos de contacto entre ellos.}
 \end{frame}
 
 \begin{frame}{Aplicar fuerzas}\usebeamercolor[fg]{normal text}
@@ -393,6 +412,7 @@
     }
   \end{columns}
   \end{block}
+  \note{En la fase de aplicación de fuerzas, se actualizará la velocidad de los cuerpos en base a la velocidad actual, el desfase de tiempo, y la fuerza y torque aplicados.}
 \end{frame}
 
 \begin{frame}{Resolver restricciones: Colisiones}\usebeamercolor[fg]{normal text}
@@ -433,6 +453,8 @@
     \end{figure}
   }
   \end{columns}
+  \note{La fase de resolución de restricciones se centra en calcular el impulso para prevenir la penetración de los cuerpos.
+  Para ello la velocidad de los cuerpos relativa al punto de contacto debe ser mayor o igual a cero.}
 \end{frame}
 
 \begin{frame}{Resolver restricciones: Articulaciones}\usebeamercolor[fg]{normal text}
@@ -469,6 +491,7 @@
     \end{figure}
   }
   \end{columns}
+  \note{Y para las articulaciones más de lo mismo, pero se tiene que mantener una velocidad en la articulación igual a cero para evitar que los cuerpos se separen.}
 \end{frame}
 
 \begin{frame}{Actualizar posiciones}\usebeamercolor[fg]{normal text}
@@ -500,9 +523,11 @@
     }
   \end{columns}
   \end{block}
+  \note{Y finalmente en la actualización de posiciones, con el mismo método de la aplicación de fuerzas, se calcula la posición de cada cuerpo en base a la anterior posición, al desfase de tiempo, y a la velocidad actual del cuerpo.}
 \end{frame}
 
 \subsection{Estructuras de aceleración: Índices espaciales}
+\note{Ahora se explicarán brevemente el los índices espaciales utilizados para acelerar la fase de detección de colisiones.}
 
 \begin{frame}{¿Qué es un índice espacial?}\usebeamercolor[fg]{normal text}
   \begin{block}{Definición}
@@ -530,6 +555,9 @@
     \end{itemize}
   \end{itemize}
   \end{block}
+  \note{Pero antes qué es un índice espacial?, pues es una estructura de aceleración para consulta espaciales, ya que te permite obtener la geometrías en un espacio 2D filtrando por un área.
+  Su origen fue con los GIS, aunque también se utilizan en computación gráfica y los propios motores de física y gráficos.
+  Existen dos tipos: estáticos para la geométricas quietas, y dinámicos por geometrías en movimiento.}
 \end{frame}
 
 \begin{frame}{\textit{Bounding Volume Hierarchy}\usebeamercolor[fg]{normal text}}
@@ -579,21 +607,8 @@
   \begin{figure}
     \includegraphics[width=0.9\textwidth]{AABBAmpliadaMovida}
   \end{figure}
-\end{frame}
-
-\begin{frame}{\textit{Sweep and Prune}\usebeamercolor[fg]{normal text}}
-  \begin{columns}
-    \column{0.5\textwidth}{
-      \begin{figure}
-        \includegraphics[scale=0.4]{SAPProyeccion}
-      \end{figure}
-    }
-    \column{0.4\textwidth}{
-      \begin{figure}
-        \includegraphics[scale=0.4]{SAPProyeccion1}
-      \end{figure}
-    }
-  \end{columns}
+  \note{Para hacer dinámico los árboles de volúmenes, se necesitan reinsertar los cuerpos que se hayan movido y al que ajustar los nodos ancestros.
+  Una optimización aplicables es ampliar el las cajas que envuelven a los cuerpos, de forma que si la caja mínima sale de esta caja ampliado se inserta, y si no, no.}
 \end{frame}
 
 \begin{frame}{\textit{Sweep and Prune}\usebeamercolor[fg]{normal text}}
@@ -612,9 +627,28 @@
     \end{itemize}
   \end{itemize}
   \end{block}
+  \note{Otro índice espacial que ofreció mejor resultados fue Sweep and Prune, ya que se especializa en la broadphase
+  Este funciona guardando en dos listas ordenadas las coordenadas mínimas y máximas de cada cuerpo, y si hay la coordenada de un cuerpo está dentro de la mínima y máxima de otro en ambos ejes, hay un potencial solapamiento.}
+\end{frame}
+
+\begin{frame}{\textit{Sweep and Prune}\usebeamercolor[fg]{normal text}}
+  \begin{columns}
+    \column{0.5\textwidth}{
+      \begin{figure}
+        \includegraphics[scale=0.4]{SAPProyeccion}
+      \end{figure}
+    }
+    \column{0.4\textwidth}{
+      \begin{figure}
+        \includegraphics[scale=0.4]{SAPProyeccion1}
+      \end{figure}
+    }
+  \end{columns}
+  \note{Aquí se puede ver su funcionamiento.}
 \end{frame}
 
 \section{Objetivos y motivaciones}
+\note{Ahora que ya tenemos claro los fundamentos, comenzamos con los objetivos y motivaciones del proyecto.}
 
 \begin{frame}{Mejorar el rendimiento de Box2D-lite}\usebeamercolor[fg]{normal text}
 
@@ -627,6 +661,7 @@
     \item No aprovecha las arquitecturas multi-núcleo.
     \end{itemize}
   \end{block}
+  \note{Por qué mejorar el rendimiento de box 2D lite?, pues porque tiene una buena documentación, con un código limpio y fácil comprender, que la simulación de físicas tiene bastante coste computacional y que no tiene muchas optimizaciones aplicadas. Además no está paralelizado.}
 \end{frame}
 
 \begin{frame}{Mejorar el rendimiento de Box2D-lite}\usebeamercolor[fg]{normal text}
@@ -651,6 +686,8 @@
     \end{itemize}
   \end{itemize}
   \end{block}
+  \note{Los objetivos de mejorar el rendimiento fueron demostrar los conocimientos adquiridos en el Máster, como en las asignaturas como HPC Tools y programación paralela.
+  Permitir al motor simular mayor cantidad de cuerpos, ocupar menos tiempo de CPU por fotograma, y poder ejecutar el motor en plataformas más molestas.}
 \end{frame}
 
 \begin{frame}{Optimizarlo para sistemas embebidos}\usebeamercolor[fg]{normal text}
@@ -672,9 +709,12 @@
     \end{itemize}
   \end{itemize}
   \end{block}
+  \note{Además, se decidió optimizar para sistemas embebidos, ya que las mejoras de rendimiento son más notorias, se tiene un mayor control de hardware.
+  Su objetivo es el poder ejecutar el motor en arquitecturas tipo ARM.}
 \end{frame}
 
 \section{Metodología y planificación}
+\note{Para desarrollar este proyecto es antes necesario escoger una mitología y aplicar una planificación.}
 
 \begin{frame}{Metodología}\usebeamercolor[fg]{normal text}
 
@@ -708,6 +748,8 @@
     }
   \end{columns}
   \end{exampleblock}
+  \note{La metodología escogida fue una metodología ágil, ya que no se conoce la complejidad de a priori del proyecto, y además permite tener pues una versión entregable en todo momento.
+  Está se implicó desarrollar un análisis inicial y unas iteraciones. En cada una se analizan cuellos de botella, investigan soluciones y miden mejoras de rendimiento.}
 \end{frame}
 
 \begin{frame}{Planificación inicial}
@@ -732,12 +774,14 @@
       \end{itemize}
     \end{itemize}
   \end{block}
+  \note{La planificación prevista consistió en unas tareas iniciales, estudiar box2d-lite, encontrar de botella principales, investigar las posibles soluciones, y preparar las herramientas necesarias.}
 \end{frame}
 
 \begin{frame}{Ejecución del proyecto y desviaciones}
   \begin{figure}
     \includegraphics[width=\textwidth]{planificacion}
   \end{figure}
+  \note{La planificación se desvió bastante de lo previsto, ya que estudiar el motor, preparar la prueba del motor, desarrollar las iteraciones, y redactar la memoria llevaron bastante más de lo esperado.}
 \end{frame}
 
 \section{Desarrollo}
