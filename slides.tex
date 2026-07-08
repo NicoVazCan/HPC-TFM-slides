@@ -200,7 +200,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Mundo}
-  \begin{lstlisting}[style=c,gobble=2]
+  \begin{myCcode}
     struct World
     {
       std::vector<Body*> bodies;    // Cuerpos rigidos
@@ -216,7 +216,7 @@
       Body* body1;
       Body* body2;
     };
-  \end{lstlisting}
+  \end{myCcode}
   \note{El mundo en el motor se representaría de la siguiente forma: una lista de cuerpos, una lista de árbitros de articulaciones, y un diccionario de hábitos de colisiones.}
 \end{frame}
 
@@ -257,7 +257,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Cuerpo rígido}
-  \begin{lstlisting}[style=c,gobble=2]
+  \begin{myCcode}
     struct Body
     {
       Vec2 position;          // Estado
@@ -273,7 +273,7 @@
       Vec2 force;             // Fuerzas externas aplicadas 
       float torque;           //
     };
-  \end{lstlisting}
+  \end{myCcode}
   \note{Y estas propiedades quedan contenidas en la siguiente clase, donde se puede ver el estado, configuración de la caja y fuerzas externas.}
 \end{frame}
 
@@ -297,7 +297,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Árbitro de colisión}
-  \begin{lstlisting}[style=c,gobble=2]
+  \begin{myCcode}
     struct Arbiter
     {
       Body* body1;          // Conectividad
@@ -308,7 +308,7 @@
 
       // ...
     };
-  \end{lstlisting}
+  \end{myCcode}
   \note{Así se representaría el árbitro de colisiones, con la referencias de los cuerpos que vigila y sus puntos de contacto.}
 \end{frame}
 
@@ -332,7 +332,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Árbitro de articulación}
-  \begin{lstlisting}[style=c,gobble=2]
+  \begin{myCcode}
     struct Joint
     {
       Body* body1;                        // Conectividad
@@ -343,7 +343,7 @@
 
       // ...
     };
-  \end{lstlisting}
+  \end{myCcode}
   \note{De nuevo para representarlos y necesitamos las referencias de los cuerpos afectados y la separación de la articulación respecto a los cuerpos.}
 \end{frame}
 
@@ -1029,14 +1029,14 @@
     }
   \end{columns}
   \begin{block}{Ejemplo}
-  \begin{lstlisting}[basicstyle=\scriptsize,language=C,gobble=2]
+  \begin{myCcode}
     #pragma omp for schedule(static)
     for (int i = 0; i < (int)bodies.size(); ++i) {
       Body* b = bodies[i];
       b->velocity += dt * (gravity + b->invMass * b->force);
       b->angularVelocity += dt * b->invI * b->torque;
     }
-  \end{lstlisting}
+  \end{myCcode}
   \end{block}
 \end{frame}
 

@@ -23,21 +23,19 @@
 \setbeamerfont{caption}{size=\footnotesize}
 \usepackage{appendixnumberbeamer}
 
-\usepackage{listings}
-\lstset{
-  basicstyle=\footnotesize\ttfamily\color{black},
-  backgroundcolor = \color{gray!20}
-}
-\lstdefinestyle{c}{language=C,
-  keywordstyle=\bfseries\color{green!40!black},
-  commentstyle=\itshape\color{purple!40!black},
-  % identifierstyle=\color{blue},
-  stringstyle=\color{orange}
-}
-\lstdefinestyle{shell}{language=sh,
-  commentstyle=\itshape\color{purple!40!black},
-  moredelim=**[is][\only<2->{\color{red}}]{@}{@},
-  moredelim=**[is][\only<3>{\color{blue}}]{¿}{¿}
+\usepackage[minted]{tcolorbox}
+\newtcblisting{myCcode}{
+  colback=gray!10,      % cor de fondo única
+  colframe=gray!10,     % ou outra cor se queres marco
+  boxrule=0pt,
+  arc=0pt,
+  outer arc=0pt,
+  listing only,
+  minted language=C,
+  minted options={
+    autogobble,
+    fontsize=\footnotesize
+  }
 }
 
 % Figure's path
