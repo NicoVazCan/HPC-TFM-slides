@@ -191,7 +191,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Mundo}
-  \begin{lstlisting}[style=c,gobble=2]
+  \begin{myCcode}
     struct World
     {
       std::vector<Body*> bodies;    // Cuerpos rigidos
@@ -207,7 +207,7 @@
       Body* body1;
       Body* body2;
     };
-  \end{lstlisting}
+  \end{myCcode}
 \end{frame}
 
 \begin{frame}{Cuerpo rígido}\usebeamercolor[fg]{normal text}
@@ -246,7 +246,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Cuerpo rígido}
-  \begin{lstlisting}[style=c,gobble=2]
+  \begin{myCcode}
     struct Body
     {
       Vec2 position;          // Estado
@@ -262,7 +262,7 @@
       Vec2 force;             // Fuerzas externas aplicadas 
       float torque;           //
     };
-  \end{lstlisting}
+  \end{myCcode}
 \end{frame}
 
 \begin{frame}{Árbitro de colisión}\usebeamercolor[fg]{normal text}
@@ -284,7 +284,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Árbitro de colisión}
-  \begin{lstlisting}[style=c,gobble=2]
+  \begin{myCcode}
     struct Arbiter
     {
       Body* body1;          // Conectividad
@@ -295,7 +295,7 @@
 
       // ...
     };
-  \end{lstlisting}
+  \end{myCcode}
 \end{frame}
 
 \begin{frame}{Árbitro de articulación}\usebeamercolor[fg]{normal text}
@@ -317,7 +317,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Árbitro de articulación}
-  \begin{lstlisting}[style=c,gobble=2]
+  \begin{myCcode}
     struct Joint
     {
       Body* body1;                        // Conectividad
@@ -328,7 +328,7 @@
 
       // ...
     };
-  \end{lstlisting}
+  \end{myCcode}
 \end{frame}
 
 \begin{frame}{¿Cómo funciona Box2D-lite?}\usebeamercolor[fg]{normal text}
@@ -985,14 +985,14 @@
     }
   \end{columns}
   \begin{block}{Ejemplo}
-  \begin{lstlisting}[basicstyle=\scriptsize,language=C,gobble=2]
+  \begin{myCcode}
     #pragma omp for schedule(static)
     for (int i = 0; i < (int)bodies.size(); ++i) {
       Body* b = bodies[i];
       b->velocity += dt * (gravity + b->invMass * b->force);
       b->angularVelocity += dt * b->invI * b->torque;
     }
-  \end{lstlisting}
+  \end{myCcode}
   \end{block}
 \end{frame}
 
