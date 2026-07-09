@@ -3,11 +3,15 @@
    #+BEGIN_EXAMPLE
    % make
    #+END_EXAMPLE
+** Generate PDF with notes
+   #+BEGIN_EXAMPLE
+   % make slides-notes
+   #+END_EXAMPLE
 ** Dependencies
-   - Theme: Metropolis
-     https://github.com/matze/mtheme
+   - Theme: Moloch (Metropolis fork)
+     https://moloch.ink
      + Debian package: texlive-latex-extra
    - Fonts: Fira Sans
      https://github.com/bBoxType/FiraSans
      + Debian package: texlive-fonts-extra
-   - XeLaTeX
+   - LuaLaTeX + BibLatex (biber)
