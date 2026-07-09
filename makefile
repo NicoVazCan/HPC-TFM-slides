@@ -1,10 +1,10 @@
-all: slides
+all: slides.pdf
 
-slides: slides.tex
-	xelatex -shell-escape slides
-	bibtex slides
-	xelatex -shell-escape slides
-	xelatex -shell-escape slides
+slides.pdf: slides.tex common.tex
+	lualatex slides
+	biber slides
+	lualatex slides
+	lualatex slides
 
 clean:
-	rm -f *.log *.aux *.nav *.toc *.out *.snm *.vrb *.bbl *.blg *~
+	rm -rf *.log *.aux *.nav *.toc *.out *.snm *.vrb *.bbl *.blg *.bcf *.listing *run.xml _minted *~
