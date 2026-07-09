@@ -1,6 +1,9 @@
-\usepackage{pgfpages}
-\setbeameroption{show notes}
-\setbeameroption{show notes on second screen=right}
+\providecommand{\shownotes}{0}
+
+\ifdefstring{\shownotes}{1}{
+  \setbeameroption{show notes}
+  \setbeameroption{show notes on second screen=right}
+}{}
 
 \usetheme[subsectionpage=progressbar]{moloch}
 
